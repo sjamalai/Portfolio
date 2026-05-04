@@ -413,6 +413,1067 @@
       transform: scale(1.03);
     }
 
+    .inline-link {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,168,50,0.3);
+      transition: border-color 0.2s;
+    }
+
+    .inline-link:hover {
+      border-color: var(--accent);
+    }
+
+    /* ── First Principles Section ── */
+    .fp-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .fp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .fp-left {
+      background: var(--surface);
+      padding: 60px;
+    }
+
+    .fp-right {
+      background: var(--surface);
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .fp-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.5vw, 30px);
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 32px;
+      position: relative;
+      padding-left: 24px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .fp-body {
+      font-size: 12px;
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    .fp-principle {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+
+    .fp-principle:hover {
+      border-color: var(--accent);
+    }
+
+    .fp-principle-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      line-height: 1;
+    }
+
+    .fp-principle-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .fp-principle-desc {
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .skill-item {
+      background: var(--surface);
+      padding: 36px 40px;
+    }
+
+    .skill-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .skill-bar-bg {
+      height: 2px;
+      background: var(--border);
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .skill-pct {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .about-left {
+      background: var(--surface);
+      padding: 60px;
+    }
+
+    .about-right {
+      background: var(--surface);
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .about-text {
+      font-size: 13px;
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    .about-highlight {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    .timeline-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-role {
+      font-size: 12px;
+      color: var(--text);
+      letter-spacing: 0.05em;
+    }
+
+    .timeline-org {
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .timeline-yr {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-big span { color: var(--accent); display: block; }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--accent);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 28px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate { animation: fadeUp 0.8s ease forwards; }
+    .delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .delay-2 { animation-delay: 0.30s; opacity: 0; }
+    .delay-3 { animation-delay: 0.45s; opacity: 0; }
+    .delay-4 { animation-delay: 0.60s; opacity: 0; }
+
+    @keyframes rotateSlow {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to   { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    .rotating {
+      animation: rotateSlow 60s linear infinite;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 120px 24px 60px; }
+      .hero-name { font-size: 64px; }
+      .crosshair, .circle-decoration, .circle-decoration2 { display: none; }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .section { padding: 60px 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .card-featured, .card-side, .card-third { grid-column: span 1; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .fp-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">JS // CAD</div>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank">Blog →</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag animate delay-1">CAD Engineer &amp; Designer</div>
+    <h1 class="hero-name animate delay-2">
+      Jamal
+      <span>Syed</span>
+    </h1>
+    <p class="hero-subtitle animate delay-3">Precision engineering. Innovative design.</p>
+    <p class="hero-desc animate delay-4">
+      Award-winning CAD engineer with expertise in mechanical systems, turbine design,
+      and industrial innovation. Two-time NASA Challenge Winner.
+    </p>
+    <div class="hero-cta animate delay-4">
+      <a href="#projects" class="btn-primary">View Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="circle-decoration rotating"></div>
+    <div class="circle-decoration2"></div>
+    <div class="crosshair"></div>
+  </section>
+
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Industry Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">85%</div>
+      <div class="stat-label">Fuel Savings Achieved</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">NASA Awards Won</div>
+    </div>
+  </div>
+
+  <section class="section" id="projects">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Selected Work</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card card-featured reveal">
+        <div class="featured-badge">★ Award Winner</div>
+        <div class="card-tag">NASA Open Innovation Challenge</div>
+        <div class="card-title">Particulate Partition System</div>
+        <p class="card-desc">
+          Winning design for the <a href="https://techport.nasa.gov/projects/157150" target="_blank" class="inline-link">NASA Particulate Partition Challenge</a>—engineering 
+          a precision mechanism capable of operating under extreme aerospace conditions. 
+          This submission earned recognition as a top-tier technical solution.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2023</span>
+          <a href="https://techport.nasa.gov/projects/157150" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+      <div class="project-card card-side reveal">
+        <div class="featured-badge">★ Award Winner</div>
+        <div class="card-tag">NASA Rock &amp; Roll Competition</div>
+        <div class="card-title">Rock &amp; Roll with NASA 2025</div>
+        
+        <div class="card-gallery">
+          <img src="42291.jpg" alt="Wheel Design Render" class="gallery-img">
+          <img src="42294.jpg" alt="Structural FEA" class="gallery-img">
+          <img src="invoice-preview.jpg" alt="Logistics Data" class="gallery-img">
+          <img src="document-preview.jpg" alt="Technical Compliance" class="gallery-img">
+        </div>
+
+        <p class="card-desc">
+          Winning submission for the NASA Rock &amp; Roll challenge, featuring a 
+          dual-compliance wheel designed for planetary exploration testbeds. 
+          Included full mechanical design and logistics documentation.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2025</span>
+          <a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+      <div class="project-card card-third reveal">
+        <div class="card-tag">Siemens</div>
+        <div class="card-title">Turbine Ignition Project</div>
+        <p class="card-desc">
+          Full CAD design of a high-fidelity industrial turbine ignition system
+          for Siemens—precision-modeled from component tolerances to final render.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2021</span>
+          <a href="https://jamalsyedcadportfolio.blogspot.com/2021/09/simens-turbine-ignition-project.html" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+      <div class="project-card card-third reveal">
+        <div class="card-tag">Automotive</div>
+        <div class="card-title">Truck Suspension Design</div>
+        <p class="card-desc">
+          Comprehensive heavy-duty suspension system modeled for extreme load 
+          distribution and structural integrity.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2022</span>
+          <a href="https://jamalsyedcadportfolio.blogspot.com/2022/11/js-cad-truck-suspension-design.html" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+      <div class="project-card card-third reveal">
+        <div class="card-tag">Consumer Electronics</div>
+        <div class="card-title">Active Stylus</div>
+        <p class="card-desc">
+          Miniaturized active stylus design focusing on internal packaging 
+          and ergonomic constraints.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2022</span>
+          <a href="https://jamalsyedcadportfolio.blogspot.com/2022/11/blog-post.html" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+      <div class="project-card card-third reveal">
+        <div class="card-tag">Energy Engineering</div>
+        <div class="card-title">Counter-Flow Burner Miniaturization</div>
+        <p class="card-desc">
+          Innovative redesign achieving 85% fuel reduction through precision 
+          miniaturization and flow optimization.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2021</span>
+          <a href="https://jamalsyedcadportfolio.blogspot.com/2021/09/miniturization-of-counter-flow-burner.html" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+      <div class="project-card card-third reveal">
+        <div class="card-tag">Documentation</div>
+        <div class="card-title">Technical Drawings</div>
+        <p class="card-desc">
+          Industry-standard GD&amp;T schematics and detailed assembly 
+          documentation for multi-domain engineering.
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2021–2024</span>
+          <a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank" class="card-arrow">→</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="fp-section reveal" id="approach">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">First Principles Thinking</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="fp-grid">
+
+      <div class="fp-left">
+        <p class="fp-quote">
+          "Don't start with what exists—start with what's physically possible."
+        </p>
+        <p class="fp-body">
+          Jamal's design philosophy is rooted in first principles thinking: the practice of
+          stripping a problem down to its fundamental truths and rebuilding solutions from
+          the ground up, unconstrained by convention or prior art.
+        </p>
+      </div>
+
+      <div class="fp-right">
+
+        <div class="fp-principle reveal">
+          <div class="fp-principle-num">01</div>
+          <div class="fp-principle-title">Decompose to Fundamentals</div>
+          <p class="fp-principle-desc">
+            Every design begins with a clean-sheet question: what does physics require here?
+          </p>
+        </div>
+
+        <div class="fp-principle reveal">
+          <div class="fp-principle-num">02</div>
+          <div class="fp-principle-title">Geometry as Reasoning</div>
+          <p class="fp-principle-desc">
+            CAD geometry is not decoration—it is a direct expression of engineering logic.
+          </p>
+        </div>
+
+        <div class="fp-principle reveal">
+          <div class="fp-principle-num">03</div>
+          <div class="fp-principle-title">Constraint as Creative Force</div>
+          <p class="fp-principle-desc">
+            Tight constraints are treated as design inputs, forcing higher-order solutions.
+          </p>
+        </div>
+
+        <div class="fp-principle reveal">
+          <div class="fp-principle-num">04</div>
+          <div class="fp-principle-title">Validate Against Reality</div>
+          <p class="fp-principle-desc">
+            A first-principles solution must close against the real world with physical intuition.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Core Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-item reveal">
+        <div class="skill-name">SolidWorks</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div>
+        <div class="skill-pct">95% Proficiency</div>
+      </div>
+
+      <div class="skill-item reveal">
+        <div class="skill-name">AutoCAD</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
+        <div class="skill-pct">90% Proficiency</div>
+      </div>
+
+      <div class="skill-item reveal">
+        <div class="skill-name">FEA / Simulation</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
+        <div class="skill-pct">85% Proficiency</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <p class="about-highlight">
+          Engineering solutions that exist at the intersection of precision and ingenuity.
+        </p>
+        <p class="about-text">
+          Jamal Syed is a CAD engineer specializing in complex mechanical systems. 
+          Two-time NASA award winner with a focus on aerospace and industrial innovation.
+        </p>
+      </div>
+      <div class="about-right reveal">
+        <div>
+          <div class="timeline-item">
+            <div>
+              <div class="timeline-role">NASA Rock &amp; Roll Competition Winner</div>
+              <div class="timeline-org">NASA</div>
+            </div>
+            <div class="timeline-yr">2025</div>
+          </div>
+          <div class="timeline-item">
+            <div>
+              <div class="timeline-role">NASA Open Innovation Challenge Winner</div>
+              <div class="timeline-org">NASA</div>
+            </div>
+            <div class="timeline-yr">2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-big">
+          Let's build
+          <span>something</span>
+          precise.
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-field">
+          <label>Name</label>
+          <input type="text" placeholder="Your name" />
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <a href="mailto:contact@jamalsyed.com" class="btn-primary" style="text-align:center;">Send Message</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-copy">© 2025 Jamal Syed. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank">Blog</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,8,0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 48px 80px;
+    }
+
+    .hero-tag {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 12vw, 160px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .hero-name span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(18px, 3vw, 28px);
+      color: var(--muted);
+      margin-top: 24px;
+      max-width: 520px;
+    }
+
+    .hero-desc {
+      margin-top: 32px;
+      font-size: 12px;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-outline:hover { color: var(--accent); border-color: var(--accent); }
+
+    .crosshair {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 280px;
+      height: 280px;
+      opacity: 0.12;
+    }
+
+    .crosshair::before, .crosshair::after {
+      content: '';
+      position: absolute;
+      background: var(--accent);
+    }
+
+    .crosshair::before { width: 100%; height: 1px; top: 50%; }
+    .crosshair::after  { width: 1px; height: 100%; left: 50%; }
+
+    .circle-decoration {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translate(0%, -50%);
+      width: 280px;
+      height: 280px;
+      border: 1px solid rgba(212,168,50,0.15);
+      border-radius: 50%;
+    }
+
+    .circle-decoration2 {
+      position: absolute;
+      right: 120px;
+      top: 50%;
+      transform: translate(0%, -50%);
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(212,168,50,0.08);
+      border-radius: 50%;
+    }
+
+    .stats-bar {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-item {
+      padding: 32px 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .section-num {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      align-self: center;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 40px;
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .project-card:hover { background: #141412; }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .card-featured { grid-column: span 8; }
+    .card-side     { grid-column: span 4; }
+    .card-third    { grid-column: span 4; }
+
+    .card-tag {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .card-desc {
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .card-meta {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-date {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .card-arrow {
+      font-size: 18px;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+
+    .project-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+    }
+
+    /* ── Gallery Styles ── */
+    .card-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .gallery-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .project-card:hover .gallery-img {
+      border-color: var(--accent);
+      transform: scale(1.03);
+    }
+
     /* ── First Principles Section ── */
     .fp-section {
       position: relative;
