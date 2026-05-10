@@ -373,6 +373,20 @@
       transition: opacity 0.2s, transform 0.2s;
       text-decoration: none;
     }
+ .gallery-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .project-card:hover .gallery-img {
+      border-color: var(--accent);
+      transform: scale(1.03);
+    }
 
     .project-card:hover .card-arrow {
       opacity: 1;
