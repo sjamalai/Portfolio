@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Counter-Flow Burner Miniaturization | Jamal Syed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg: #0a0a08; --surface: #111110; --accent: #d4a832; --accent2: #e8c96a; --text: #e8e6df; --muted: #7a7868; --border: #252520; --grid: #1a1a16; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-weight: 300; overflow-x: hidden; cursor: crosshair; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.6; pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; border-bottom: 1px solid var(--border); background: rgba(10,10,8,0.85); backdrop-filter: blur(12px); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .project-hero { position: relative; z-index: 1; padding: 160px 48px 80px; border-bottom: 1px solid var(--border); }
+    .back-link { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+    .project-category { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .project-category::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+    .project-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 10vw, 120px); line-height: 0.9; letter-spacing: 0.03em; color: var(--text); max-width: 900px; }
+    .project-meta-row { display: flex; gap: 60px; margin-top: 48px; flex-wrap: wrap; }
+    .project-meta-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .project-meta-value { font-size: 13px; color: var(--text); }
+    .image-block { position: relative; z-index: 1; padding: 0 48px; }
+    .placeholder-wrap { width: 100%; aspect-ratio: 16/7; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+    .placeholder-wrap svg { width: 100%; height: 100%; display: block; }
+    .placeholder-caption { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); margin-top: 12px; text-align: right; }
+    .content-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 2fr; gap: 1px; background: var(--border); margin: 60px 48px; }
+    .content-sidebar { background: var(--surface); padding: 48px 40px; }
+    .content-main { background: var(--surface); padding: 48px 56px; }
+    .sidebar-section { margin-bottom: 48px; }
+    .sidebar-section:last-child { margin-bottom: 0; }
+    .sidebar-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .sidebar-value { font-size: 12px; line-height: 1.8; color: var(--muted); }
+    .sidebar-tag { display: inline-block; border: 1px solid var(--border); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 4px 10px; margin: 4px 4px 4px 0; }
+    .content-section { margin-bottom: 48px; }
+    .content-section:last-child { margin-bottom: 0; }
+    .content-heading { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .content-body { font-size: 12px; line-height: 2.1; color: var(--muted); }
+    .content-body + .content-body { margin-top: 16px; }
+    .highlight-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--text); line-height: 1.6; border-left: 2px solid var(--accent); padding-left: 24px; margin: 32px 0; }
+    .stat-callout { display: flex; align-items: baseline; gap: 16px; margin: 28px 0; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: var(--accent); line-height: 1; }
+    .stat-desc { font-size: 12px; line-height: 1.8; color: var(--muted); max-width: 300px; }
+    .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 11px; }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-key { color: var(--muted); letter-spacing: 0.05em; }
+    .spec-val { color: var(--text); }
+    footer { position: relative; z-index: 1; padding: 28px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 60px; }
+    .footer-copy { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) { nav { padding: 16px 24px; } .project-hero { padding: 120px 24px 60px; } .image-block { padding: 0 24px; } .content-grid { grid-template-columns: 1fr; margin: 40px 24px; } footer { flex-direction: column; gap: 16px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="jamal_syed_portfolio.html" class="nav-logo">JS // CAD</a>
+    <ul class="nav-links">
+      <li><a href="jamal_syed_portfolio.html#projects">Projects</a></li>
+      <li><a href="jamal_syed_portfolio.html#approach">Approach</a></li>
+      <li><a href="jamal_syed_portfolio.html#skills">Skills</a></li>
+      <li><a href="jamal_syed_portfolio.html#about">About</a></li>
+      <li><a href="jamal_syed_portfolio.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-hero reveal">
+    <a href="jamal_syed_portfolio.html#projects" class="back-link">← Back to Projects</a>
+    <div class="project-category">Energy Engineering · Combustion Systems</div>
+    <h1 class="project-title">Counter-Flow Burner Miniaturization</h1>
+    <div class="project-meta-row">
+      <div class="project-meta-item"><div class="project-meta-label">Year</div><div class="project-meta-value">2021</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Domain</div><div class="project-meta-value">Energy Engineering</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Key Result</div><div class="project-meta-value">85% Fuel Savings</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Software</div><div class="project-meta-value">SolidWorks · CFD</div></div>
+    </div>
+  </div>
+
+  <div class="image-block reveal">
+    <div class="placeholder-wrap">
+      <svg viewBox="0 0 1200 525" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="1200" height="525" fill="#111110"/>
+        <g stroke="#1a1a16" stroke-width="1" opacity="0.8">
+          <line x1="0" y1="105" x2="1200" y2="105"/><line x1="0" y1="210" x2="1200" y2="210"/>
+          <line x1="0" y1="315" x2="1200" y2="315"/><line x1="0" y1="420" x2="1200" y2="420"/>
+          <line x1="150" y1="0" x2="150" y2="525"/><line x1="300" y1="0" x2="300" y2="525"/>
+          <line x1="450" y1="0" x2="450" y2="525"/><line x1="600" y1="0" x2="600" y2="525"/>
+          <line x1="750" y1="0" x2="750" y2="525"/><line x1="900" y1="0" x2="900" y2="525"/>
+          <line x1="1050" y1="0" x2="1050" y2="525"/>
+        </g>
+        <!-- Original vs miniaturized comparison -->
+        <!-- Original (left, large, muted) -->
+        <g fill="none" stroke="#7a7868" stroke-width="1" opacity="0.5">
+          <rect x="120" y="100" width="220" height="320" rx="4"/>
+          <!-- Fuel inlet left -->
+          <line x1="80" y1="200" x2="120" y2="200"/>
+          <line x1="80" y1="230" x2="120" y2="230"/>
+          <!-- Air inlet left -->
+          <line x1="80" y1="280" x2="120" y2="280"/>
+          <line x1="80" y1="310" x2="120" y2="310"/>
+          <!-- Flame zone -->
+          <ellipse cx="230" cy="260" rx="60" ry="80"/>
+          <!-- Exhaust top -->
+          <line x1="200" y1="100" x2="200" y2="70"/>
+          <line x1="240" y1="100" x2="240" y2="70"/>
+          <text x="230" y="65" font-family="DM Mono, monospace" font-size="8" fill="#7a7868" opacity="0.6" text-anchor="middle">EXHAUST</text>
+          <text x="230" y="460" font-family="DM Mono, monospace" font-size="9" fill="#7a7868" opacity="0.6" text-anchor="middle">ORIGINAL</text>
+        </g>
+        <!-- Arrow -->
+        <g stroke="#d4a832" stroke-width="1.5" opacity="0.6">
+          <line x1="390" y1="262" x2="480" y2="262"/>
+          <polyline points="468,252 480,262 468,272"/>
+          <text x="434" y="252" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.7" text-anchor="middle">MINIATURIZE</text>
+        </g>
+        <!-- Miniaturized (right, smaller, accent) -->
+        <g fill="none" stroke="#d4a832" stroke-width="1.5" opacity="0.75">
+          <rect x="520" y="160" width="130" height="200" rx="3"/>
+          <!-- Fuel inlet -->
+          <line x1="490" y1="205" x2="520" y2="205"/>
+          <line x1="490" y1="220" x2="520" y2="220"/>
+          <!-- Air inlet -->
+          <line x1="490" y1="275" x2="520" y2="275"/>
+          <line x1="490" y1="290" x2="520" y2="290"/>
+          <!-- Compact flame zone -->
+          <ellipse cx="585" cy="260" rx="35" ry="50"/>
+          <!-- Exhaust -->
+          <line x1="565" y1="160" x2="565" y2="138"/>
+          <line x1="605" y1="160" x2="605" y2="138"/>
+          <text x="585" y="132" font-family="DM Mono, monospace" font-size="8" fill="#d4a832" opacity="0.6" text-anchor="middle">EXHAUST</text>
+          <text x="585" y="390" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.8" text-anchor="middle">MINIATURIZED</text>
+        </g>
+        <!-- Size comparison bracket -->
+        <g stroke="#d4a832" stroke-width="0.8" opacity="0.35">
+          <line x1="120" y1="470" x2="340" y2="470"/>
+          <line x1="120" y1="465" x2="120" y2="475"/>
+          <line x1="340" y1="465" x2="340" y2="475"/>
+          <line x1="520" y1="470" x2="650" y2="470"/>
+          <line x1="520" y1="465" x2="520" y2="475"/>
+          <line x1="650" y1="465" x2="650" y2="475"/>
+        </g>
+        <text x="230" y="487" font-family="DM Mono, monospace" font-size="8" fill="#7a7868" text-anchor="middle">BASELINE SIZE</text>
+        <text x="585" y="487" font-family="DM Mono, monospace" font-size="8" fill="#d4a832" text-anchor="middle">MINIATURIZED</text>
+        <!-- 85% callout -->
+        <text x="900" y="220" font-family="Bebas Neue, sans-serif" font-size="96" fill="#d4a832" opacity="0.12" text-anchor="middle">85%</text>
+        <text x="900" y="240" font-family="Bebas Neue, sans-serif" font-size="48" fill="#d4a832" opacity="0.55" text-anchor="middle">85%</text>
+        <text x="900" y="270" font-family="DM Mono, monospace" font-size="10" fill="#7a7868" text-anchor="middle">FUEL REDUCTION</text>
+        <text x="600" y="500" font-family="DM Mono, monospace" font-size="9" fill="#7a7868" text-anchor="middle">COMPARATIVE SECTION · COUNTER-FLOW BURNER MINIATURIZATION · 2021</text>
+        <text x="50" y="30" font-family="DM Mono, monospace" font-size="10" fill="#d4a832" opacity="0.4">CAD REF: ENE-CFB-2021</text>
+        <g stroke="#d4a832" stroke-width="1" opacity="0.3">
+          <polyline points="20,20 20,50 50,50"/><polyline points="1180,20 1180,50 1150,50"/>
+          <polyline points="20,505 20,475 50,475"/><polyline points="1180,505 1180,475 1150,475"/>
+        </g>
+        <text x="600" y="50" font-family="Bebas Neue, sans-serif" font-size="13" fill="#7a7868" text-anchor="middle" letter-spacing="4">PLACEHOLDER — REPLACE WITH CAD RENDER</text>
+      </svg>
+    </div>
+    <p class="placeholder-caption">Fig. 01 — Original vs miniaturised burner comparison · Placeholder render</p>
+  </div>
+
+  <div class="content-grid reveal">
+    <div class="content-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Key Result</div>
+        <div class="sidebar-value">85% reduction in fuel consumption through precision miniaturisation and combustion optimisation</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Tools Used</div>
+        <div class="sidebar-value">
+          <span class="sidebar-tag">SolidWorks</span>
+          <span class="sidebar-tag">CFD</span>
+          <span class="sidebar-tag">Thermal Analysis</span>
+          <span class="sidebar-tag">GD&T</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Key Specifications</div>
+        <div class="sidebar-value">
+          <div class="spec-row"><span class="spec-key">Fuel Reduction</span><span class="spec-val">85%</span></div>
+          <div class="spec-row"><span class="spec-key">Operating Temp.</span><span class="spec-val">Placeholder</span></div>
+          <div class="spec-row"><span class="spec-key">Scale Factor</span><span class="spec-val">Placeholder</span></div>
+          <div class="spec-row"><span class="spec-key">Fuel Type</span><span class="spec-val">Placeholder</span></div>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Industry</div>
+        <div class="sidebar-value">Energy Engineering · Combustion Systems</div>
+      </div>
+    </div>
+
+    <div class="content-main">
+      <div class="content-section">
+        <div class="content-heading">Project Overview</div>
+        <div class="stat-callout">
+          <div class="stat-num">85%</div>
+          <div class="stat-desc">reduction in fuel consumption achieved through first-principles combustion redesign and precision miniaturisation</div>
+        </div>
+        <p class="content-body">
+          This project stands as one of the clearest demonstrations of first-principles thinking in
+          Jamal's portfolio. Rather than incrementally improving the existing counter-flow burner,
+          the fundamental question was posed: does the large-scale architecture remain valid at
+          the required output level? The answer—no—led to a complete redesign from combustion
+          physics upward.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Design Approach</div>
+        <p class="content-body">
+          The counter-flow burner operates by introducing fuel and oxidiser in opposing streams,
+          creating a stable flame zone between them. At reduced scale, the original geometry
+          created excessive heat loss to surface area relative to the combustion volume, making
+          the original proportions thermodynamically wasteful.
+        </p>
+        <div class="highlight-quote">
+          "The 85% saving wasn't found by refining the old design—it was found by asking whether the old design was ever necessary at this scale."
+        </div>
+        <p class="content-body">
+          By re-deriving the flame zone geometry from mass flow and reaction rate equations,
+          a miniaturised architecture was arrived at that maintained thermal efficiency while
+          dramatically reducing fuel throughput. CFD analysis validated the flow field and
+          confirmed stable combustion across the operating range before committing to final geometry.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Outcome</div>
+        <p class="content-body">
+          The redesigned miniaturised burner achieved an 85% reduction in fuel consumption
+          versus the baseline design, with equivalent thermal output maintained. The project
+          delivered full CAD documentation, CFD simulation results, and a manufacturing-ready
+          design package.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-copy">© 2025 Jamal Syed. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="jamal_syed_portfolio.html#projects">Work</a>
+      <a href="jamal_syed_portfolio.html#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
