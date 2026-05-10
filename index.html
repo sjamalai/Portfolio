@@ -390,82 +390,6 @@
       margin-bottom: 16px;
     }
 
-    /* ── Gallery Styles ── */
-    .card-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin: 20px 0;
-    }
-
-    .gallery-img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .project-card:hover .gallery-img {
-      border-color: var(--accent);
-      transform: scale(1.03);
-    }
-
-    .inline-link {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(212,168,50,0.3);
-      transition: border-color 0.2s;
-    }
-
-    .inline-link:hover {
-      border-color: var(--accent);
-    }
-
-    /* ── Cookie Banner Styles ── */
-    .cookie-banner {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      right: 24px;
-      background: var(--surface);
-      border: 1px solid var(--accent);
-      padding: 24px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 9999;
-      backdrop-filter: blur(12px);
-      display: none; /* Hidden by default, shown via JS */
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    .cookie-text {
-      font-size: 11px;
-      line-height: 1.6;
-      color: var(--text);
-      max-width: 70%;
-    }
-
-    .cookie-text a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-      .cookie-banner {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-      }
-      .cookie-text { max-width: 100%; }
-    }
-
     /* ── First Principles Section ── */
     .fp-section {
       position: relative;
@@ -802,10 +726,10 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank">Blog →</a></li>
     </ul>
   </nav>
 
+  <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-tag animate delay-1">CAD Engineer &amp; Designer</div>
     <h1 class="hero-name animate delay-2">
@@ -814,9 +738,8 @@
     </h1>
     <p class="hero-subtitle animate delay-3">Precision engineering. Innovative design.</p>
     <p class="hero-desc animate delay-4">
-      2X NASA Award-winning engineer with expertise in mechanical ventilation systems, turbine design,
-      and Wheel and tyre innovation. Rock and Roll with NASA 2025 Challenge Finalist. 
-      NASA Particulate Partition Challenge 2023 Finalist.
+      Award-winning CAD engineer with expertise in mechanical systems, turbine design,
+      and industrial innovation. Two-time NASA Challenge Winner.
     </p>
     <div class="hero-cta animate delay-4">
       <a href="#projects" class="btn-primary">View Work</a>
@@ -827,6 +750,7 @@
     <div class="crosshair"></div>
   </section>
 
+  <!-- ── STATS ── -->
   <div class="stats-bar reveal">
     <div class="stat-item">
       <div class="stat-num">7+</div>
@@ -846,6 +770,7 @@
     </div>
   </div>
 
+  <!-- ── PROJECTS ── -->
   <section class="section" id="projects">
     <div class="section-header">
       <span class="section-num">01</span>
@@ -854,45 +779,37 @@
     </div>
     <div class="projects-grid">
 
+      <!-- Featured: NASA Particulate Partition -->
       <div class="project-card card-featured reveal">
         <div class="featured-badge">★ Award Winner</div>
         <div class="card-tag">NASA Open Innovation Challenge</div>
         <div class="card-title">Particulate Partition System</div>
         <p class="card-desc">
-          Winning design for the <a href="https://techport.nasa.gov/projects/157150" target="_blank" class="inline-link">NASA Particulate Partition Challenge</a>—engineering 
-          a precision mechanism capable of operating under extreme aerospace conditions. 
-          This submission earned recognition as a top-tier technical solution.
+          Winning design for NASA's open innovation challenge—engineering a precision
+          particulate partition mechanism capable of operating under extreme aerospace
+          conditions. This submission earned recognition as a top solution.
         </p>
         <div class="card-meta">
           <span class="card-date">2023</span>
-          <a href="https://techport.nasa.gov/projects/157150" target="_blank" class="card-arrow">→</a>
         </div>
       </div>
 
+      <!-- New: NASA Rock and Roll 2025 -->
       <div class="project-card card-side reveal">
         <div class="featured-badge">★ Award Winner</div>
         <div class="card-tag">NASA Rock &amp; Roll Competition</div>
         <div class="card-title">Rock &amp; Roll with NASA 2025</div>
-        
-        <div class="card-title">
-          <img src="docs/42294.jpg" alt="US Department Of Defence Compliance" class="gallery-img">
-        </div>
-        
-        <div class="card-title">
-          <img src="docs/42291.jpg" alt="Proof Of Shipment" class="gallery-img">
-        </div>
-
         <p class="card-desc">
-          Winning submission for the NASA Rock &amp; Roll challenge, featuring a 
-          dual-compliance wheel designed for planetary exploration testbeds. 
-          Included full mechanical design and logistics documentation.
+          Winner of the NASA Rock &amp; Roll with NASA 2025 competition—a cutting-edge
+          engineering challenge requiring dynamic structural analysis and innovative
+          mechanical design under NASA's rigorous aerospace standards.
         </p>
         <div class="card-meta">
           <span class="card-date">2025</span>
-          <a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank" class="card-arrow">→</a>
         </div>
       </div>
 
+      <!-- Siemens Turbine -->
       <div class="project-card card-third reveal">
         <div class="card-tag">Siemens</div>
         <div class="card-title">Turbine Ignition Project</div>
@@ -902,65 +819,70 @@
         </p>
         <div class="card-meta">
           <span class="card-date">2021</span>
-          <a href="https://jamalsyedcadportfolio.blogspot.com/2021/09/simens-turbine-ignition-project.html" target="_blank" class="card-arrow">→</a>
+          <a href="project-siemens-turbine.html" class="card-arrow">→</a>
         </div>
       </div>
 
+      <!-- Truck Suspension -->
       <div class="project-card card-third reveal">
         <div class="card-tag">Automotive</div>
         <div class="card-title">Truck Suspension Design</div>
         <p class="card-desc">
-          Comprehensive heavy-duty suspension system modeled for extreme load 
-          distribution and structural integrity.
+          Comprehensive suspension system designed and modeled for heavy-duty truck
+          applications, focusing on load distribution and structural integrity.
         </p>
         <div class="card-meta">
           <span class="card-date">2022</span>
-          <a href="https://jamalsyedcadportfolio.blogspot.com/2022/11/js-cad-truck-suspension-design.html" target="_blank" class="card-arrow">→</a>
+          <a href="project-truck-suspension.html" class="card-arrow">→</a>
         </div>
       </div>
 
+      <!-- Active Stylus -->
       <div class="project-card card-third reveal">
         <div class="card-tag">Consumer Electronics</div>
         <div class="card-title">Active Stylus</div>
         <p class="card-desc">
-          Miniaturized active stylus design focusing on internal packaging 
-          and ergonomic constraints.
+          Miniaturized active stylus design—balancing ergonomics, internal
+          component packaging, and manufacturing constraints.
         </p>
         <div class="card-meta">
           <span class="card-date">2022</span>
-          <a href="https://jamalsyedcadportfolio.blogspot.com/2022/11/blog-post.html" target="_blank" class="card-arrow">→</a>
+          <a href="project-active-stylus.html" class="card-arrow">→</a>
         </div>
       </div>
 
+      <!-- Counter-Flow Burner -->
       <div class="project-card card-third reveal">
         <div class="card-tag">Energy Engineering</div>
         <div class="card-title">Counter-Flow Burner Miniaturization</div>
         <p class="card-desc">
-          Innovative redesign achieving 85% fuel reduction through precision 
-          miniaturization and flow optimization.
+          Innovative redesign of a counter-flow burner, achieving an 85% reduction
+          in fuel consumption through precision miniaturization.
         </p>
         <div class="card-meta">
           <span class="card-date">2021</span>
-          <a href="https://jamalsyedcadportfolio.blogspot.com/2021/09/miniturization-of-counter-flow-burner.html" target="_blank" class="card-arrow">→</a>
+          <a href="project-counterflow-burner.html" class="card-arrow">→</a>
         </div>
       </div>
 
+      <!-- Technical Drawings -->
       <div class="project-card card-third reveal">
         <div class="card-tag">Documentation</div>
         <div class="card-title">Technical Drawings</div>
         <p class="card-desc">
-          Industry-standard GD&amp;T schematics and detailed assembly 
-          documentation for multi-domain engineering.
+          Industry-standard technical drawings and schematics across multiple
+          engineering domains—from GD&amp;T to detailed assembly documentation.
         </p>
         <div class="card-meta">
           <span class="card-date">2021–2024</span>
-          <a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank" class="card-arrow">→</a>
+          <a href="project-technical-drawings.html" class="card-arrow">→</a>
         </div>
       </div>
 
     </div>
   </section>
 
+  <!-- ── FIRST PRINCIPLES THINKING ── -->
   <section class="fp-section reveal" id="approach">
     <div class="section-header">
       <span class="section-num">02</span>
@@ -978,6 +900,22 @@
           stripping a problem down to its fundamental truths and rebuilding solutions from
           the ground up, unconstrained by convention or prior art.
         </p>
+        <br/>
+        <p class="fp-body">
+          Rather than inheriting assumptions baked into existing designs, Jamal begins every
+          CAD project by asking what the physics actually demands. What forces are at play?
+          What materials behave optimally under those loads? What geometry satisfies the
+          constraints with the least material and the highest performance margin?
+        </p>
+        <br/>
+        <p class="fp-body">
+          This method produced the 85% fuel savings in the counter-flow burner project—not
+          through incremental iteration, but by questioning whether a large burner was
+          ever necessary in the first place. The same discipline drove the NASA particulate
+          partition winning entry: rather than adapting a conventional filter mechanism,
+          Jamal re-derived the separation problem from first-order fluid dynamics and
+          material science principles.
+        </p>
       </div>
 
       <div class="fp-right">
@@ -987,6 +925,8 @@
           <div class="fp-principle-title">Decompose to Fundamentals</div>
           <p class="fp-principle-desc">
             Every design begins with a clean-sheet question: what does physics require here?
+            Assumptions inherited from prior designs are treated as hypotheses to be tested,
+            not constraints to be accepted.
           </p>
         </div>
 
@@ -995,6 +935,8 @@
           <div class="fp-principle-title">Geometry as Reasoning</div>
           <p class="fp-principle-desc">
             CAD geometry is not decoration—it is a direct expression of engineering logic.
+            Every surface, fillet, and tolerance encodes a decision derived from load paths,
+            manufacturing physics, or assembly intent.
           </p>
         </div>
 
@@ -1002,7 +944,9 @@
           <div class="fp-principle-num">03</div>
           <div class="fp-principle-title">Constraint as Creative Force</div>
           <p class="fp-principle-desc">
-            Tight constraints are treated as design inputs, forcing higher-order solutions.
+            Tight constraints—miniaturization targets, fuel budgets, aerospace tolerances—are
+            treated as design inputs, not obstacles. Working within extreme limits forces
+            more elegant, higher-order solutions than unconstrained design ever produces.
           </p>
         </div>
 
@@ -1010,7 +954,9 @@
           <div class="fp-principle-num">04</div>
           <div class="fp-principle-title">Validate Against Reality</div>
           <p class="fp-principle-desc">
-            A first-principles solution must close against the real world with physical intuition.
+            A first-principles solution must close against the real world. Analytical estimates,
+            simulation results, and physical intuition are cross-checked at every stage to
+            ensure the reasoning chain holds before committing to final geometry.
           </p>
         </div>
 
@@ -1018,6 +964,7 @@
     </div>
   </section>
 
+  <!-- ── SKILLS ── -->
   <section class="section" id="skills">
     <div class="section-header">
       <span class="section-num">03</span>
@@ -1039,14 +986,33 @@
       </div>
 
       <div class="skill-item reveal">
+        <div class="skill-name">CATIA</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+        <div class="skill-pct">80% Proficiency</div>
+      </div>
+
+      <div class="skill-item reveal">
         <div class="skill-name">FEA / Simulation</div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
         <div class="skill-pct">85% Proficiency</div>
       </div>
 
+      <div class="skill-item reveal">
+        <div class="skill-name">GD&amp;T</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:92%"></div></div>
+        <div class="skill-pct">92% Proficiency</div>
+      </div>
+
+      <div class="skill-item reveal">
+        <div class="skill-name">Fusion 360</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:78%"></div></div>
+        <div class="skill-pct">78% Proficiency</div>
+      </div>
+
     </div>
   </section>
 
+  <!-- ── ABOUT ── -->
   <section class="section" id="about">
     <div class="section-header">
       <span class="section-num">04</span>
@@ -1059,8 +1025,16 @@
           Engineering solutions that exist at the intersection of precision and ingenuity.
         </p>
         <p class="about-text">
-          Jamal Syed is a CAD engineer specializing in complex mechanical systems. 
-          Two-time NASA award winner with a focus on aerospace and industrial innovation.
+          Jamal Syed is a CAD engineer and designer specialising in complex mechanical systems,
+          aerospace components, and industrial innovation. With a track record spanning automotive,
+          energy, consumer electronics, and aerospace sectors, his work is defined by a rigorous
+          first-principles approach and an uncompromising standard of precision.
+        </p>
+        <br/>
+        <p class="about-text">
+          Two-time NASA challenge winner. His designs have delivered measurable outcomes—from
+          an 85% reduction in fuel consumption to award-winning aerospace mechanisms—by
+          interrogating assumptions others take for granted.
         </p>
       </div>
       <div class="about-right reveal">
@@ -1079,11 +1053,26 @@
             </div>
             <div class="timeline-yr">2023</div>
           </div>
+          <div class="timeline-item">
+            <div>
+              <div class="timeline-role">Turbine Ignition CAD Design</div>
+              <div class="timeline-org">Siemens</div>
+            </div>
+            <div class="timeline-yr">2021</div>
+          </div>
+          <div class="timeline-item">
+            <div>
+              <div class="timeline-role">Counter-Flow Burner Miniaturization</div>
+              <div class="timeline-org">Energy Engineering</div>
+            </div>
+            <div class="timeline-yr">2021</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ── CONTACT ── -->
   <section class="contact-section" id="contact">
     <div class="section-header">
       <span class="section-num">05</span>
@@ -1093,46 +1082,39 @@
     <div class="contact-grid">
       <div class="reveal">
         <div class="contact-big">
-          Let's build.
+          Let's build
+          <span>something</span>
+          precise.
         </div>
       </div>
       <div class="contact-form reveal">
         <div class="form-field">
           <label>Name</label>
-          <input type="text" placeholder="Your name" id="contact-name" />
+          <input type="text" placeholder="Your name" />
         </div>
         <div class="form-field">
           <label>Email</label>
-          <input type="email" placeholder="your@email.com" id="contact-email" />
+          <input type="email" placeholder="your@email.com" />
         </div>
         <div class="form-field">
           <label>Message</label>
-          <textarea rows="5" placeholder="Tell me about your project..." id="contact-message"></textarea>
+          <textarea rows="5" placeholder="Tell me about your project..."></textarea>
         </div>
-        <a href="mailto:jamalsyed_786@hotmail.com" class="btn-primary" style="text-align:center;">Send Message</a>
+        <a href="mailto:contact@jamalsyed.com" class="btn-primary" style="text-align:center;">Send Message</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="footer-copy">© 2026 Jamal Syed | Passengers5719 GmbH. All rights reserved.</div>
+    <div class="footer-copy">© 2025 Jamal Syed. All rights reserved.</div>
     <div class="footer-links">
-      <a href="https://jamalsyedcadportfolio.blogspot.com" target="_blank">Blog</a>
       <a href="#projects">Work</a>
       <a href="#contact">Contact</a>
     </div>
   </footer>
 
-  <div id="cookie-banner" class="cookie-banner">
-    <div class="cookie-text">
-      This precision-engineered portfolio uses technical cookies to ensure optimal performance. 
-      By continuing to browse, you agree to our <a href="#">Cookie Policy</a>.
-    </div>
-    <button id="accept-cookies" class="btn-primary">Accept</button>
-  </div>
-
   <script>
-    // ── SCROLL REVEAL LOGIC ──
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1142,22 +1124,6 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // ── COOKIE BANNER LOGIC ──
-    window.addEventListener('load', function() {
-      // Check if user has already accepted cookies
-      if (!localStorage.getItem('jamalPortfolioCookiesAccepted')) {
-        const banner = document.getElementById('cookie-banner');
-        banner.style.display = 'flex';
-      }
-    });
-
-    document.getElementById('accept-cookies').addEventListener('click', function() {
-      // Save acceptance to Local Storage
-      localStorage.setItem('jamalPortfolioCookiesAccepted', 'true');
-      // Hide the banner
-      document.getElementById('cookie-banner').style.display = 'none';
-    });
   </script>
 
 </body>
