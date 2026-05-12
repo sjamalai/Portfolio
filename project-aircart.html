@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AirCart | Jamal Syed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg: #0a0a08; --surface: #111110; --accent: #d4a832; --accent2: #e8c96a; --text: #e8e6df; --muted: #7a7868; --border: #252520; --grid: #1a1a16; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-weight: 300; overflow-x: hidden; cursor: crosshair; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.6; pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; border-bottom: 1px solid var(--border); background: rgba(10,10,8,0.85); backdrop-filter: blur(12px); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .project-hero { position: relative; z-index: 1; padding: 160px 48px 80px; border-bottom: 1px solid var(--border); }
+    .back-link { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+    .project-category { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .project-category::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+    .project-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 10vw, 140px); line-height: 0.9; letter-spacing: 0.03em; color: var(--text); max-width: 900px; }
+    .project-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(16px, 2vw, 22px); color: var(--muted); margin-top: 20px; }
+    .project-meta-row { display: flex; gap: 60px; margin-top: 48px; flex-wrap: wrap; }
+    .project-meta-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .project-meta-value { font-size: 13px; color: var(--text); }
+
+    /* Hero image - real photo from blogpost */
+    .image-block { position: relative; z-index: 1; padding: 0 48px; }
+    .hero-image { width: 100%; aspect-ratio: 16/7; object-fit: cover; border: 1px solid var(--border); display: block; }
+    .placeholder-wrap { width: 100%; aspect-ratio: 16/7; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+    .placeholder-wrap svg { width: 100%; height: 100%; display: block; }
+    .placeholder-caption { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); margin-top: 12px; text-align: right; }
+
+    /* Feature strip */
+    .feature-strip { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin: 60px 48px 0; }
+    .feature-item { background: var(--surface); padding: 36px 32px; position: relative; transition: background 0.2s; }
+    .feature-item:hover { background: #141412; }
+    .feature-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--accent); opacity: 0.18; position: absolute; top: 16px; right: 20px; line-height: 1; }
+    .feature-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.05em; color: var(--text); margin-bottom: 10px; }
+    .feature-desc { font-size: 11px; line-height: 1.8; color: var(--muted); }
+
+    /* Gallery grid */
+    .gallery-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin: 1px 48px 0; }
+    .gallery-item { background: var(--surface); overflow: hidden; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%) brightness(0.85); transition: filter 0.3s, transform 0.4s; }
+    .gallery-item:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.03); }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: linear-gradient(transparent, rgba(10,10,8,0.85)); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* Content */
+    .content-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 2fr; gap: 1px; background: var(--border); margin: 60px 48px; }
+    .content-sidebar { background: var(--surface); padding: 48px 40px; }
+    .content-main { background: var(--surface); padding: 48px 56px; }
+    .sidebar-section { margin-bottom: 48px; }
+    .sidebar-section:last-child { margin-bottom: 0; }
+    .sidebar-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .sidebar-value { font-size: 12px; line-height: 1.8; color: var(--muted); }
+    .sidebar-tag { display: inline-block; border: 1px solid var(--border); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 4px 10px; margin: 4px 4px 4px 0; }
+    .outbrave-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 11px; letter-spacing: 0.1em; text-decoration: none; border-bottom: 1px solid rgba(212,168,50,0.3); padding-bottom: 2px; margin-top: 8px; transition: border-color 0.2s; }
+    .outbrave-link:hover { border-color: var(--accent); }
+    .content-section { margin-bottom: 48px; }
+    .content-section:last-child { margin-bottom: 0; }
+    .content-heading { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .content-body { font-size: 12px; line-height: 2.1; color: var(--muted); }
+    .content-body + .content-body { margin-top: 16px; }
+    .highlight-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--text); line-height: 1.6; border-left: 2px solid var(--accent); padding-left: 24px; margin: 32px 0; }
+    .stat-callout { display: flex; align-items: baseline; gap: 16px; margin: 28px 0; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: var(--accent); line-height: 1; }
+    .stat-desc { font-size: 12px; line-height: 1.8; color: var(--muted); max-width: 300px; }
+
+    footer { position: relative; z-index: 1; padding: 28px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 60px; }
+    .footer-copy { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .project-hero { padding: 120px 24px 60px; }
+      .image-block { padding: 0 24px; }
+      .feature-strip { grid-template-columns: 1fr 1fr; margin: 40px 24px 0; }
+      .gallery-grid { grid-template-columns: 1fr; margin: 1px 24px 0; }
+      .content-grid { grid-template-columns: 1fr; margin: 40px 24px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="jamal_syed_portfolio.html" class="nav-logo">JS // CAD</a>
+    <ul class="nav-links">
+      <li><a href="jamal_syed_portfolio.html#projects">Projects</a></li>
+      <li><a href="jamal_syed_portfolio.html#approach">Approach</a></li>
+      <li><a href="jamal_syed_portfolio.html#skills">Skills</a></li>
+      <li><a href="jamal_syed_portfolio.html#about">About</a></li>
+      <li><a href="jamal_syed_portfolio.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="project-hero reveal">
+    <a href="jamal_syed_portfolio.html#projects" class="back-link">← Back to Projects</a>
+    <div class="project-category">Social Impact · Mechanical Design · Stanford Collaboration</div>
+    <h1 class="project-title">AirCart</h1>
+    <p class="project-subtitle">Ancient Wisdom, Modern Ease</p>
+    <div class="project-meta-row">
+      <div class="project-meta-item"><div class="project-meta-label">Year</div><div class="project-meta-value">2021</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Collaboration</div><div class="project-meta-value">Stanford University</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Stage</div><div class="project-meta-value">Reached Funding Phase</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Software</div><div class="project-meta-value">SolidWorks · Assembly CAD</div></div>
+    </div>
+  </div>
+
+  <!-- ── HERO IMAGE ── -->
+  <div class="image-block reveal">
+    <div class="placeholder-wrap">
+      <svg viewBox="0 0 1200 525" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="1200" height="525" fill="#111110"/>
+        <g stroke="#1a1a16" stroke-width="1" opacity="0.8">
+          <line x1="0" y1="105" x2="1200" y2="105"/><line x1="0" y1="210" x2="1200" y2="210"/>
+          <line x1="0" y1="315" x2="1200" y2="315"/><line x1="0" y1="420" x2="1200" y2="420"/>
+          <line x1="150" y1="0" x2="150" y2="525"/><line x1="300" y1="0" x2="300" y2="525"/>
+          <line x1="450" y1="0" x2="450" y2="525"/><line x1="600" y1="0" x2="600" y2="525"/>
+          <line x1="750" y1="0" x2="750" y2="525"/><line x1="900" y1="0" x2="900" y2="525"/>
+          <line x1="1050" y1="0" x2="1050" y2="525"/>
+        </g>
+        <!-- Cart body - isometric-ish side profile -->
+        <g fill="none" stroke="#d4a832" stroke-width="1.5" opacity="0.75">
+          <!-- Main cart platform -->
+          <rect x="280" y="220" width="560" height="140" rx="4"/>
+          <!-- Cargo bed detail lines -->
+          <line x1="280" y1="260" x2="840" y2="260" stroke-width="0.8" opacity="0.5"/>
+          <line x1="280" y1="300" x2="840" y2="300" stroke-width="0.8" opacity="0.5"/>
+          <line x1="400" y1="220" x2="400" y2="360" stroke-width="0.8" opacity="0.5"/>
+          <line x1="520" y1="220" x2="520" y2="360" stroke-width="0.8" opacity="0.5"/>
+          <line x1="640" y1="220" x2="640" y2="360" stroke-width="0.8" opacity="0.5"/>
+          <line x1="760" y1="220" x2="760" y2="360" stroke-width="0.8" opacity="0.5"/>
+          <!-- Axle -->
+          <line x1="250" y1="380" x2="870" y2="380"/>
+          <!-- Wheels -->
+          <circle cx="350" cy="400" r="65"/>
+          <circle cx="350" cy="400" r="40"/>
+          <circle cx="350" cy="400" r="12" fill="#d4a832" opacity="0.2"/>
+          <circle cx="770" cy="400" r="65"/>
+          <circle cx="770" cy="400" r="40"/>
+          <circle cx="770" cy="400" r="12" fill="#d4a832" opacity="0.2"/>
+          <!-- Wheel spokes -->
+          <line x1="350" y1="335" x2="350" y2="388"/>
+          <line x1="350" y1="412" x2="350" y2="465"/>
+          <line x1="285" y1="400" x2="338" y2="400"/>
+          <line x1="362" y1="400" x2="415" y2="400"/>
+          <line x1="304" y1="354" x2="341" y2="391"/>
+          <line x1="359" y1="409" x2="396" y2="446"/>
+          <line x1="396" y1="354" x2="359" y2="391"/>
+          <line x1="341" y1="409" x2="304" y2="446"/>
+          <line x1="770" y1="335" x2="770" y2="388"/>
+          <line x1="770" y1="412" x2="770" y2="465"/>
+          <line x1="705" y1="400" x2="758" y2="400"/>
+          <line x1="782" y1="400" x2="835" y2="400"/>
+          <line x1="724" y1="354" x2="761" y2="391"/>
+          <line x1="779" y1="409" x2="816" y2="446"/>
+          <line x1="816" y1="354" x2="779" y2="391"/>
+          <line x1="761" y1="409" x2="724" y2="446"/>
+          <!-- Drawbar / harness connector -->
+          <line x1="280" y1="290" x2="160" y2="330"/>
+          <line x1="280" y1="290" x2="160" y2="260"/>
+          <!-- Shock absorber / suspension springs -->
+          <line x1="380" y1="360" x2="380" y2="375"/>
+          <path d="M376,375 Q384,380 376,385 Q368,390 376,395 Q384,400 376,405" stroke-width="2"/>
+          <line x1="740" y1="360" x2="740" y2="375"/>
+          <path d="M736,375 Q744,380 736,385 Q728,390 736,395 Q744,400 736,405" stroke-width="2"/>
+          <!-- Auto-brake callout line -->
+          <line x1="870" y1="390" x2="960" y2="350"/>
+          <circle cx="960" cy="345" r="4" fill="#d4a832" opacity="0.5"/>
+        </g>
+        <!-- Labels -->
+        <text x="980" y="338" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.6">AUTO-BRAKE SYSTEM</text>
+        <text x="110" y="292" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.6">HARNESS</text>
+        <text x="110" y="305" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.5">INTERFACE</text>
+        <text x="340" y="490" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.5">SUSPENSION</text>
+        <text x="700" y="490" font-family="DM Mono, monospace" font-size="9" fill="#d4a832" opacity="0.5">LOAD AXLE</text>
+        <!-- Dimension lines -->
+        <g stroke="#d4a832" stroke-width="0.7" opacity="0.28">
+          <line x1="280" y1="185" x2="840" y2="185"/>
+          <line x1="280" y1="180" x2="280" y2="190"/>
+          <line x1="840" y1="180" x2="840" y2="190"/>
+        </g>
+        <text x="560" y="178" font-family="DM Mono, monospace" font-size="8" fill="#d4a832" opacity="0.4" text-anchor="middle">PLATFORM SPAN — PLACEHOLDER</text>
+        <!-- Corner marks -->
+        <g stroke="#d4a832" stroke-width="1" opacity="0.25">
+          <polyline points="20,20 20,50 50,50"/><polyline points="1180,20 1180,50 1150,50"/>
+          <polyline points="20,505 20,475 50,475"/><polyline points="1180,505 1180,475 1150,475"/>
+        </g>
+        <text x="50" y="30" font-family="DM Mono, monospace" font-size="10" fill="#d4a832" opacity="0.4">CAD REF: AIRCART-MAIN-ASSY-2021</text>
+        <text x="600" y="500" font-family="DM Mono, monospace" font-size="9" fill="#7a7868" text-anchor="middle">MAIN ASSEMBLY — SIDE ELEVATION · AIRCART · STANFORD COLLABORATION 2021</text>
+        <text x="600" y="50" font-family="Bebas Neue, sans-serif" font-size="13" fill="#7a7868" text-anchor="middle" letter-spacing="4">PLACEHOLDER — REPLACE WITH CAD RENDER</text>
+      </svg>
+    </div>
+    <p class="placeholder-caption">Fig. 01 — AirCart main assembly, side elevation · Placeholder render</p>
+  </div>
+
+  <!-- ── FEATURE STRIP (4 key systems) ── -->
+  <div class="feature-strip reveal">
+    <div class="feature-item">
+      <div class="feature-num">01</div>
+      <div class="feature-title">Auto-Brake System</div>
+      <p class="feature-desc">Automatically engages on downhill descents to relieve the animal of the cart's load force, preventing runaway and injury.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">02</div>
+      <div class="feature-title">Suspension System</div>
+      <p class="feature-desc">Vibration-damping suspension isolates road shock from both the cargo and the animal, reducing fatigue across long hauls.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">03</div>
+      <div class="feature-title">Load-Bearing Axle</div>
+      <p class="feature-desc">Redesigned axle and drive shaft architecture transfers static and dynamic cargo loads directly to the wheels, off the animal's spine.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">04</div>
+      <div class="feature-title">Ergonomic Harness</div>
+      <p class="feature-desc">A custom-designed harness distributes pull forces evenly across the animal's musculoskeletal frame, eliminating pressure points.</p>
+    </div>
+  </div>
+
+  <!-- ── PHOTO GALLERY (real project images) ── -->
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPJ76fYwA8r8CMk4y7um-wXtx1qZTl_-L_EVwI80hWJU-AVnr1ce0KjTh_sVrLvURCSN6aipx8Z3bD4lnILnR-FXiNT1ZtS4FPiCKHP2DhrWHoXmhSNurk9cFupSSRLJ9aQKxWl7Xk5RA/w640-h432-rw/WhatsApp+Image+2021-09-08+at+11.10.09+PM+%25289%2529.jpeg" alt="AirCart — Auto Braking System prototype" loading="lazy"/>
+      <div class="gallery-caption">Auto-Brake System · Downhill Assist</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4NO3sU-6FfFH5Ctbj77r468dyi-2OlaYiUDJQFm_IhRdcx0mf7NGNpXVcMKAk5VaC5lZWdELJvbQCQMKgZyQHssSpqbY4bBTbMSyNYpOoa-6boUOcpXTX_1jAah34bbq5nL5xVKoFNzI/w690-h431-rw/WhatsApp+Image+2021-09-08+at+11.10.08+PM+%252811%2529.jpeg" alt="AirCart — Suspension System" loading="lazy"/>
+      <div class="gallery-caption">Suspension System · Vibration Damping</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs-hEhYs-zUC70R9O5wo9xdRfgK58l71lnaiqVj6BzgLFgiNcQI3adVHlCE6Qby5BwlyIe3b8eiRhClnRIcjBv8fPXbLZuX-iXQexdGUabBKU-ADsQfS3AcoqUYnauB3GLAOX0g2-wrTg/w708-h444-rw/axle_system.jpg" alt="AirCart — Load-bearing axle and drive shaft" loading="lazy"/>
+      <div class="gallery-caption">Load-Bearing Axle · Drive Shaft</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBbiq0O6AyqhDxXRosrJ9jBhQm9vbJrZnkORtRpjo7cLS8jH2Jr8Y1jM3zDDEHoPioweKMEPO-LZpokjC-9bDZsUHlV7NbO8NmZuSD1fj830ZVT40-UJ5cNKRuNugxndaTbkKIVUsvxN8/w699-h358-rw/2020-04-26+14_11_58-MAIN_ASSEMBLY+%2528Active%2529+C__Users_Jamal_OneDrive_Desktop_Air+Cart_main_assembly.as.png" alt="AirCart — Main Assembly CAD" loading="lazy"/>
+      <div class="gallery-caption">Main Assembly · SolidWorks CAD</div>
+    </div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="content-grid reveal">
+    <div class="content-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Collaboration</div>
+        <div class="sidebar-value">Personal project developed jointly with a Stanford University colleague</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Project Status</div>
+        <div class="sidebar-value">Reached funding phase as a startup venture</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Tools Used</div>
+        <div class="sidebar-value">
+          <span class="sidebar-tag">SolidWorks</span>
+          <span class="sidebar-tag">Full Assembly CAD</span>
+          <span class="sidebar-tag">Ergonomic Analysis</span>
+          <span class="sidebar-tag">Structural Design</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Key Systems Designed</div>
+        <div class="sidebar-value">
+          Auto-brake · Vibration suspension · Load axle · Ergonomic harness
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Startup</div>
+        <div class="sidebar-value">
+          <a href="https://www.outbrave.org/" target="_blank" class="outbrave-link">outbrave.org →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-main">
+      <div class="content-section">
+        <div class="content-heading">The Problem</div>
+        <div class="stat-callout">
+          <div class="stat-num">70%</div>
+          <div class="stat-desc">of freight in developing countries is still carried by animals — an unchanged reality for centuries</div>
+        </div>
+        <p class="content-body">
+          Across large parts of South Asia, Sub-Saharan Africa, and Latin America, the bullock cart
+          remains the primary mode of freight transport. The animals pulling these carts endure
+          significant physical stress: uneven load distribution compresses the spine, primitive harnesses
+          create pressure sores, and unbraked downhill descents force the animal to act as the
+          braking system with its own body weight.
+        </p>
+        <p class="content-body">
+          The AirCart project — developed in collaboration with a Stanford University colleague and
+          pursued as a startup under the Outbrave initiative — set out to revolutionise the bullock
+          cart using modern mechanical engineering, without abandoning the technology the communities
+          already know how to use and maintain.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Design Philosophy</div>
+        <div class="highlight-quote">
+          "Ancient wisdom, modern ease — engineering that respects what already works and fixes only what doesn't."
+        </div>
+        <p class="content-body">
+          The design constraint was intentionally tight: the AirCart had to be manufacturable
+          with local materials and skills, repairable in rural settings without specialist tools,
+          and immediately intuitive to communities that have used carts for generations. This ruled
+          out electronic or hydraulic solutions and focused the team on pure mechanical engineering.
+        </p>
+        <p class="content-body">
+          Every system was derived from first principles. The auto-brake mechanism, for instance,
+          was designed around the physics of gravitational load shift during descent — the same
+          force that causes runaway carts was harnessed to engage the braking geometry automatically,
+          requiring no driver input.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Systems Designed</div>
+        <p class="content-body">
+          The <strong style="color:var(--text)">auto-brake system</strong> engages passively as the cart tips forward on downhill terrain,
+          activating brake contact without any cable or lever input from the driver. This directly
+          removes the animal from the braking force equation on descents.
+        </p>
+        <p class="content-body">
+          The <strong style="color:var(--text)">suspension system</strong> uses a mechanical damping arrangement to absorb road
+          vibration before it transfers to the cargo and the harness interface, reducing cumulative
+          musculoskeletal load on the animal over long-distance hauls.
+        </p>
+        <p class="content-body">
+          The <strong style="color:var(--text)">load-bearing axle and drive shaft</strong> were redesigned to carry static cargo
+          load directly into the wheel hubs, preventing it from being transmitted upward through the
+          drawbar and into the harness. The <strong style="color:var(--text)">ergonomic harness</strong> was then designed to distribute
+          only pull force — not weight — evenly across the animal's shoulders and chest.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Outcome</div>
+        <p class="content-body">
+          The AirCart project progressed from concept through full CAD assembly to a funded
+          startup phase, validated by the Outbrave initiative. The full SolidWorks assembly model
+          encompassed all four mechanical systems with manufacturing-ready geometry and assembly
+          documentation. The project stands as a demonstration that rigorous mechanical design
+          can deliver meaningful social impact — not through complexity, but through precision
+          applied to the right problems.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-copy">© 2025 Jamal Syed. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="jamal_syed_portfolio.html#projects">Work</a>
+      <a href="jamal_syed_portfolio.html#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
