@@ -30,6 +30,10 @@
     .placeholder-wrap svg { width: 100%; height: 100%; display: block; }
     .placeholder-caption { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); margin-top: 12px; text-align: right; }
     /* Drawing gallery */
+    .gallery-item { background: var(--surface); overflow: hidden; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%) brightness(0.85); transition: filter 0.3s, transform 0.4s; }
+    .gallery-item:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.03); }
+    .gallery-item.tall { grid-row: span 2; }
     .drawing-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin: 0 48px; }
     .drawing-thumb { background: var(--surface); aspect-ratio: 4/3; position: relative; overflow: hidden; cursor: pointer; transition: background 0.2s; }
     .drawing-thumb:hover { background: #141412; }
