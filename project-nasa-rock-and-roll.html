@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rock &amp; Roll with NASA | Jamal Syed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a08; --surface: #111110; --accent: #d4a832; --accent2: #e8c96a;
+      --text: #e8e6df; --muted: #7a7868; --border: #252520; --grid: #1a1a16;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-weight: 300; overflow-x: hidden; cursor: crosshair; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px; opacity: 0.6; pointer-events: none; z-index: 0;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px; border-bottom: 1px solid var(--border);
+      background: rgba(10,10,8,0.85); backdrop-filter: blur(12px);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .project-hero {
+      position: relative; z-index: 1;
+      padding: 160px 48px 80px; border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    /* faint NASA meatball-style ring in background */
+    .hero-ring {
+      position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+      width: 500px; height: 500px; border-radius: 50%;
+      border: 1px solid rgba(212,168,50,0.08);
+      pointer-events: none;
+    }
+    .hero-ring::before {
+      content: ''; position: absolute; inset: 40px; border-radius: 50%;
+      border: 1px solid rgba(212,168,50,0.06);
+    }
+    .hero-ring::after {
+      content: ''; position: absolute; inset: 100px; border-radius: 50%;
+      border: 1px solid rgba(212,168,50,0.05);
+    }
+    .back-link { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+    .award-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: var(--bg);
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 5px 12px; margin-bottom: 28px;
+    }
+    .project-category { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .project-category::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+    .project-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 10vw, 140px); line-height: 0.88; letter-spacing: 0.02em; color: var(--text); max-width: 900px; }
+    .project-title span { color: var(--accent); display: block; }
+    .project-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(16px, 2vw, 22px); color: var(--muted); margin-top: 20px; max-width: 540px; }
+    .project-meta-row { display: flex; gap: 60px; margin-top: 48px; flex-wrap: wrap; }
+    .project-meta-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .project-meta-value { font-size: 13px; color: var(--text); }
+
+    /* ── HERO IMAGE (full-bleed) ── */
+    .hero-image-block { position: relative; z-index: 1; }
+    .hero-image-wrap {
+      width: 100%; aspect-ratio: 21/9; overflow: hidden;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .hero-image-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.88);
+    }
+    .hero-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(10,10,8,0.5) 0%, transparent 50%, rgba(10,10,8,0.3) 100%);
+    }
+    .hero-image-caption {
+      position: absolute; bottom: 20px; right: 32px;
+      font-size: 9px; letter-spacing: 0.18em; color: rgba(232,230,223,0.5);
+      text-transform: uppercase;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-item { padding: 32px 48px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+    /* ── GALLERY GRID ── */
+    .gallery-section { position: relative; z-index: 1; padding: 60px 48px 0; }
+    .gallery-section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 24px; }
+    .gallery-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
+    .gallery-line { flex: 1; height: 1px; background: var(--border); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1px; background: var(--border);
+    }
+    .gallery-item { overflow: hidden; position: relative; background: var(--surface); }
+    .gallery-item.main { grid-row: span 2; aspect-ratio: unset; min-height: 520px; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: grayscale(10%) brightness(0.9);
+      transition: filter 0.4s ease, transform 0.5s ease;
+    }
+    .gallery-item:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.04); }
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 20px 14px;
+      background: linear-gradient(transparent, rgba(10,10,8,0.92));
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── VIDEO NOTICE ── */
+    .video-notice {
+      position: relative; z-index: 1; margin: 1px 48px 0;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 28px 36px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+      border-top: none;
+    }
+    .video-notice-left { display: flex; align-items: center; gap: 20px; }
+    .video-icon {
+      width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      color: var(--accent); font-size: 16px;
+    }
+    .video-notice-text { font-size: 11px; color: var(--muted); line-height: 1.7; }
+    .video-notice-text strong { color: var(--text); }
+    .video-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: var(--bg);
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 12px 24px; text-decoration: none;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .video-link:hover { background: var(--accent2); }
+
+    /* ── SHIPPING EVIDENCE ── */
+    .evidence-section { position: relative; z-index: 1; padding: 60px 48px 0; }
+    .evidence-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 24px; }
+    .evidence-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
+    .evidence-line { flex: 1; height: 1px; background: var(--border); }
+    .evidence-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border);
+    }
+    .evidence-item { background: var(--surface); padding: 40px; }
+    .evidence-item-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .evidence-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 11px; gap: 20px; }
+    .evidence-row:last-child { border-bottom: none; }
+    .evidence-key { color: var(--muted); letter-spacing: 0.05em; flex-shrink: 0; }
+    .evidence-val { color: var(--text); text-align: right; }
+
+    /* shipping photo thumbnails */
+    .shipping-photos {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border);
+    }
+    .shipping-photo { background: var(--surface); overflow: hidden; position: relative; aspect-ratio: 4/3; }
+    .shipping-photo img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter 0.3s; }
+    .shipping-photo:hover img { filter: brightness(1); }
+    .shipping-photo-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; background: linear-gradient(transparent, rgba(10,10,8,0.9)); font-size: 9px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+
+    /* ── CONTENT ── */
+    .content-grid {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 1px; background: var(--border); margin: 60px 48px;
+    }
+    .content-sidebar { background: var(--surface); padding: 48px 40px; }
+    .content-main { background: var(--surface); padding: 48px 56px; }
+    .sidebar-section { margin-bottom: 48px; }
+    .sidebar-section:last-child { margin-bottom: 0; }
+    .sidebar-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .sidebar-value { font-size: 12px; line-height: 1.9; color: var(--muted); }
+    .sidebar-tag { display: inline-block; border: 1px solid var(--border); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 4px 10px; margin: 4px 4px 4px 0; }
+    .content-section { margin-bottom: 48px; }
+    .content-section:last-child { margin-bottom: 0; }
+    .content-heading { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .content-body { font-size: 12px; line-height: 2.1; color: var(--muted); }
+    .content-body + .content-body { margin-top: 16px; }
+    .highlight-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--text); line-height: 1.6; border-left: 2px solid var(--accent); padding-left: 24px; margin: 32px 0; }
+
+    footer { position: relative; z-index: 1; padding: 28px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 0; }
+    .footer-copy { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .project-hero { padding: 120px 24px 60px; }
+      .hero-ring { display: none; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { padding: 24px; }
+      .gallery-section { padding: 40px 24px 0; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.main { min-height: 300px; }
+      .video-notice { flex-direction: column; margin: 1px 24px 0; }
+      .evidence-section { padding: 40px 24px 0; }
+      .evidence-grid { grid-template-columns: 1fr; }
+      .shipping-photos { grid-template-columns: 1fr; }
+      .content-grid { grid-template-columns: 1fr; margin: 40px 24px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="jamal_syed_portfolio.html" class="nav-logo">JS // CAD</a>
+    <ul class="nav-links">
+      <li><a href="jamal_syed_portfolio.html#projects">Projects</a></li>
+      <li><a href="jamal_syed_portfolio.html#approach">Approach</a></li>
+      <li><a href="jamal_syed_portfolio.html#skills">Skills</a></li>
+      <li><a href="jamal_syed_portfolio.html#about">About</a></li>
+      <li><a href="jamal_syed_portfolio.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="project-hero reveal">
+    <div class="hero-ring"></div>
+    <a href="jamal_syed_portfolio.html#projects" class="back-link">← Back to Projects</a>
+    <div class="award-badge">★ Award Winner · 2025</div>
+    <div class="project-category">NASA HeroX Challenge · Aerospace Engineering</div>
+    <h1 class="project-title">
+      Rock &amp; Roll
+      <span>with NASA</span>
+    </h1>
+    <p class="project-subtitle">Airless wheel design for planetary and lunar surface exploration</p>
+    <div class="project-meta-row">
+      <div class="project-meta-item"><div class="project-meta-label">Year</div><div class="project-meta-value">2025 – 2026</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Challenge</div><div class="project-meta-value">NASA HeroX Wheel Challenge</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Submission</div><div class="project-meta-value">18-inch Physical Airless Wheel</div></div>
+      <div class="project-meta-item"><div class="project-meta-label">Shipped From</div><div class="project-meta-value">Bammental, Germany → NASA JSC Houston</div></div>
+    </div>
+  </div>
+
+  <!-- ── HERO IMAGE ── -->
+  <div class="hero-image-block reveal">
+    <div class="hero-image-wrap">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj9JVnsoZKeSp6RNijt8Refux-WJFywMCIK185ayDhcYGjf0HmgM-2t-2w-VX81Oxol0pphLUZszU-F9PwYTyF9IqhfpLgjLQar6qK-JKoZEU3QoO-71RfYF2H2Ut8HLAfbwQpFoPlCzOeUOPQM-djiHRzzGNAqDb8olUaSVNJohKvabjJStmWMoDSFEY/s5712/IMG_5032.jpeg"
+        alt="AirCart airless wheel — NASA HeroX submission"
+        loading="eager"
+      />
+      <div class="hero-image-overlay"></div>
+      <div class="hero-image-caption">NASA HeroX Wheel Challenge · Physical submission · 2026</div>
+    </div>
+  </div>
+
+  <!-- ── STATS ── -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-num">18"</div>
+      <div class="stat-label">Wheel Diameter</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10<span style="font-size:28px">kg</span></div>
+      <div class="stat-label">Submission Weight</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Pneumatic Components</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">★</div>
+      <div class="stat-label">NASA Award Winner</div>
+    </div>
+  </div>
+
+  <!-- ── PHOTO GALLERY ── -->
+  <div class="gallery-section reveal">
+    <div class="gallery-section-header">
+      <span class="gallery-label">Visual Documentation</span>
+      <div class="gallery-line"></div>
+    </div>
+    <div class="gallery-grid">
+
+      <!-- Main large image -->
+      <div class="gallery-item main">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCve1OCNzKe0MI7Wrm62vYxbJ3l2dCYqZ6X7wWwdjOERZqylqRjqjlDqCVi-rNT4XfV8V46s3qcO1Hpxr5U2x39vv2EK-ay20DqX76L9rje01es4Q8N3W7_yMlljVHSGaHpovh8GlLF3zPsGRcQDrSHLssVyS7v1WINGD17VNs6ZEekA_cqGpNpfkyi08/s5712/IMG_5021.jpeg"
+          alt="Airless wheel — detail view"
+          loading="lazy"
+        />
+        <div class="gallery-caption">Wheel assembly — structural detail</div>
+      </div>
+
+      <!-- Right column top -->
+      <div class="gallery-item">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoO01VkAwZXWOifIYN5f_BrSwa0c2iAhuJKeW9z1vVRj_FwYO1o3lUQ_d3XgEJQxMMHUexLla694mSloFIGp-Xj9Tk99XAnIkeEuvZFyMCMyvmkzdebAuaQ1YA0EqO_SWVMaOfK6_48HlZ1egPOfGlozL-xKsRRsUZ6xpHBPWpVxXP7xxXWTQDrxNjZ_w/s5712/IMG_5033.jpeg"
+          alt="Airless wheel — tread and spoke geometry"
+          loading="lazy"
+        />
+        <div class="gallery-caption">Tread geometry · Spoke lattice</div>
+      </div>
+
+      <!-- Right column bottom -->
+      <div class="gallery-item">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgH_t0LJYm00bGvzyQBJ_vAVDH-a3fGxzgHsDVCCGoNa3eZoREo79oxmMKFvNev2a7SDEcGBGAGif2wJDw9SuqElRoCUGTjQBOI3udyOAYftyHKeTxmZu8FYUIuRU4yyHosOVxVOwGO_-jzpot2R_fST_p5wI0Xo0_MNwh76KVnaVSVGlkF56DTYUNUJ4g/s5712/IMG_4947.jpeg"
+          alt="Airless wheel — fabricated prototype"
+          loading="lazy"
+        />
+        <div class="gallery-caption">Fabricated prototype · Pre-shipment</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── VIDEO NOTICE ── -->
+  <div class="video-notice reveal">
+    <div class="video-notice-left">
+      <div class="video-icon">▶</div>
+      <div class="video-notice-text">
+        <strong>Two build &amp; test videos are available on the project blog.</strong><br/>
+        They show the wheel in motion and document the fabrication process — watch them on the original post.
+      </div>
+    </div>
+    <a href="https://jamalsyedcadportfolio.blogspot.com/2026/05/rock-and-roll-with-nasa.html" target="_blank" class="video-link">Watch Videos →</a>
+  </div>
+
+  <!-- ── SHIPPING EVIDENCE ── -->
+  <div class="evidence-section reveal">
+    <div class="evidence-header">
+      <span class="evidence-label">Submission Documentation</span>
+      <div class="evidence-line"></div>
+    </div>
+
+    <div class="evidence-grid">
+
+      <!-- Invoice details -->
+      <div class="evidence-item">
+        <div class="evidence-item-label">Commercial Invoice · INV-2026-001</div>
+        <div class="evidence-row"><span class="evidence-key">Date</span><span class="evidence-val">April 15, 2026</span></div>
+        <div class="evidence-row"><span class="evidence-key">Shipper</span><span class="evidence-val">Syed Jamal Amir · Bammental, Germany</span></div>
+        <div class="evidence-row"><span class="evidence-key">Consignee</span><span class="evidence-val">NASA Johnson Space Center · Houston TX 77058</span></div>
+        <div class="evidence-row"><span class="evidence-key">Description</span><span class="evidence-val">18-inch Wheel — Rock and Roll with NASA Challenge Entry</span></div>
+        <div class="evidence-row"><span class="evidence-key">HS Code</span><span class="evidence-val">9817.85.01</span></div>
+        <div class="evidence-row"><span class="evidence-key">Declared Value</span><span class="evidence-val">USD 520.00 + USD 91.00 shipping</span></div>
+        <div class="evidence-row"><span class="evidence-key">Purpose</span><span class="evidence-val">Non-commercial competition entry · Not for resale</span></div>
+      </div>
+
+      <!-- Shipping details -->
+      <div class="evidence-item">
+        <div class="evidence-item-label">Shipping Record · DD Form 1149</div>
+        <div class="evidence-row"><span class="evidence-key">Date Shipped</span><span class="evidence-val">April 16, 2026</span></div>
+        <div class="evidence-row"><span class="evidence-key">Carrier</span><span class="evidence-val">UPS Expedited</span></div>
+        <div class="evidence-row"><span class="evidence-key">Tracking Zone</span><span class="evidence-val">TX 775 6-01</span></div>
+        <div class="evidence-row"><span class="evidence-key">Weight</span><span class="evidence-val">10 kg · 1 of 1 package</span></div>
+        <div class="evidence-row"><span class="evidence-key">Origin</span><span class="evidence-val">Oberdorfstrasse 18, 69245 Bammental, Germany</span></div>
+        <div class="evidence-row"><span class="evidence-key">Destination</span><span class="evidence-val">NASA JSC · Rovng Bldg 420 · 2101 NASA Pkwy · Houston TX 77058</span></div>
+        <div class="evidence-row"><span class="evidence-key">Recipients</span><span class="evidence-val">Ed Herrera / Candace Campanelli · NASA JSC</span></div>
+      </div>
+
+    </div>
+
+    <!-- Shipping photos -->
+    <div class="shipping-photos">
+      <div class="shipping-photo">
+        <img src="/mnt/user-data/uploads/42291.jpg" alt="Package prepared for NASA shipment" loading="lazy" onerror="this.parentElement.style.background='#1a1a18';this.style.display='none'"/>
+        <div class="shipping-photo-caption">Package prepared · Bammental, Germany</div>
+      </div>
+      <div class="shipping-photo">
+        <img src="/mnt/user-data/uploads/42294.jpg" alt="UPS shipping label — NASA JSC Houston" loading="lazy" onerror="this.parentElement.style.background='#1a1a18';this.style.display='none'"/>
+        <div class="shipping-photo-caption">UPS Expedited · NASA JSC Houston label</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="content-grid reveal">
+    <div class="content-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Challenge</div>
+        <div class="sidebar-value">NASA HeroX Rock &amp; Roll with NASA Wheel Challenge — open innovation competition for next-generation planetary wheel design</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Submission Type</div>
+        <div class="sidebar-value">Physical fabricated prototype · 18-inch airless wheel · shipped to NASA JSC for evaluation</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Skills Applied</div>
+        <div class="sidebar-value">
+          <span class="sidebar-tag">SolidWorks</span>
+          <span class="sidebar-tag">Structural Analysis</span>
+          <span class="sidebar-tag">Physical Fabrication</span>
+          <span class="sidebar-tag">Aerospace Tolerancing</span>
+          <span class="sidebar-tag">GD&T</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Result</div>
+        <div class="sidebar-value">★ Award Winner — NASA Rock &amp; Roll Challenge 2025</div>
+      </div>
+    </div>
+
+    <div class="content-main">
+      <div class="content-section">
+        <div class="content-heading">The Challenge</div>
+        <p class="content-body">
+          NASA's Rock &amp; Roll with NASA challenge — hosted through HeroX — invited engineers
+          worldwide to design and physically fabricate an 18-inch airless wheel capable of
+          operating across the rock-strewn, dust-laden terrain of planetary and lunar surfaces.
+          Unlike pneumatic tyres, airless wheels cannot fail from puncture or pressure loss,
+          making them essential for long-duration rover missions where maintenance is impossible.
+        </p>
+        <p class="content-body">
+          The winning design needed to demonstrate structural integrity under load, terrain
+          compliance across irregular rock geometry, and the manufacturing precision required
+          for aerospace-grade hardware — all in a single physical submission shipped directly
+          to NASA Johnson Space Center for hands-on evaluation.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Design Approach</div>
+        <div class="highlight-quote">
+          "An airless wheel is a structural problem disguised as a tyre problem — the geometry must flex where rubber would, and stand firm where the rim must."
+        </div>
+        <p class="content-body">
+          The design process began with the fundamental mechanics of airless tyre behaviour:
+          load must be transferred from the hub to the contact patch through a compliant
+          intermediate structure that deflects under local obstacle loads while maintaining
+          a stable overall radius. This rules out rigid spoke geometries and demands a
+          lattice or continuous shell approach tuned to the correct stiffness-to-mass ratio.
+        </p>
+        <p class="content-body">
+          The spoke and tread geometry was developed parametrically in SolidWorks, with
+          structural analysis run across simulated rock-contact load cases to validate
+          deflection and stress margins before committing to fabrication. The physical
+          prototype was then built to match the CAD geometry within aerospace-appropriate
+          tolerances — a requirement underscored by the fact that NASA evaluators would be
+          handling and loading the wheel directly.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Physical Submission</div>
+        <p class="content-body">
+          The completed 18-inch airless wheel — weighing 10 kg — was shipped via UPS Expedited
+          from Bammental, Germany to NASA Johnson Space Center in Houston, Texas, arriving
+          at Building 420 for evaluation by NASA's challenge review team. The shipment was
+          accompanied by full commercial documentation and a DD Form 1149 material shipment
+          record, as required for non-commercial hardware entering a US government facility.
+        </p>
+        <p class="content-body">
+          The journey from a CAD model in Germany to a physical wheel on a NASA evaluator's
+          bench is the most direct validation possible: not a simulation, not a render — a
+          real object, built to the design, crossing an ocean to be judged by the agency
+          that will one day drive wheels like it across the Moon.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <div class="content-heading">Outcome</div>
+        <p class="content-body">
+          The submission was recognised as an award-winning entry in the NASA Rock &amp; Roll
+          with NASA Challenge 2025 — Jamal's second NASA challenge win, following the
+          Particulate Partition System award in 2023. Two documentation videos covering
+          the build process and wheel-in-motion testing are available on the project blog.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-copy">© 2025 Jamal Syed. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="jamal_syed_portfolio.html#projects">Work</a>
+      <a href="jamal_syed_portfolio.html#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
