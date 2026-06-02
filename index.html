@@ -116,8 +116,8 @@
     opacity:0.45;
   }
 
-  /* ─── PARALLAX HORSE SCENE ─── */
-  #horse-scene {
+ /* ─── PARALLAX HORSE SCENE ─── */
+ /* #horse-scene {
     position: fixed;
     right: 0;
     top: 0;
@@ -147,20 +147,20 @@
   #horse-scene.arrested { opacity: 0; transition: opacity 0.8s ease; }
 
   /* Horse gallop animation */
-  @keyframes gallop-bounce {
+/*  @keyframes gallop-bounce {
     0%   { transform: translateY(0px) rotate(-1deg); }
     25%  { transform: translateY(-6px) rotate(1deg); }
     50%  { transform: translateY(-2px) rotate(-0.5deg); }
     75%  { transform: translateY(-8px) rotate(1.5deg); }
     100% { transform: translateY(0px) rotate(-1deg); }
   }
-  #horse-scene.horse-visible .hs-horse {
+ /* #horse-scene.horse-visible .hs-horse {
     animation: gallop-bounce 0.55s ease-in-out infinite;
   }
-  #horse-scene.arrested .hs-horse { animation: none; }
+/*  #horse-scene.arrested .hs-horse { animation: none; } */
 
   /* ─── PARALLAX ROBOT SCENE ─── */
-  #robot-scene {
+/* #robot-scene {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -171,9 +171,9 @@
     overflow: hidden;
     opacity: 0;
     transition: opacity 0.6s ease;
-  }
+  } 
   #robot-scene.robot-visible { opacity: 1; }
-  #robot-scene.robot-arrested { opacity: 0; transition: opacity 0.6s ease; }
+  #robot-scene.robot-arrested { opacity: 0; transition: opacity 0.6s ease; } 
 
   #robot-scene .rs-wrap {
     position: absolute;
@@ -194,13 +194,13 @@
   }
 
   /* subtle robot idle sway */
-  @keyframes robot-idle {
+ /* @keyframes robot-idle {
     0%,100% { transform: translateY(0px); }
     50%      { transform: translateY(-4px); }
   }
   #robot-scene.robot-visible svg {
     animation: robot-idle 3s ease-in-out infinite;
-  }
+  } */
 
   nav {
     position:fixed; top:0; left:0; right:0; z-index:300;
