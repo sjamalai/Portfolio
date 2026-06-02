@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,37 +8,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&family=Cormorant+Garant:ital,wght@0,300;1,300;1,500;1,700&display=swap" rel="stylesheet"/>
 
   <style>
+  /* ─────────────────────────────────────────
+     RESET & TOKENS (Dynamic Theme)
+  ───────────────────────────────────────── */
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
+    /* 
+       Theme 1: The Sand Era (Past / Origin) 
+       Warm, mechanical, grounded.
+    */
     --bg:          #06060a;
     --surf:        #0d0d12;
     --surf2:       #121219;
-    --accent:      #c9a227;
+    
+    --accent:      #c9a227; /* Gold */
     --accent-lt:   #e8c24a;
     --amber:       #c47a20;
     --steel:       #4a5a6a;
     --elec:        #38b2d8;
+    
     --text:        #e4e2db;
     --muted:       #5a5870;
     --border:      #1c1c26;
     --grid:        #0f0f16;
+
+    /* Alpha/Opacity Variables for Transitions */
     --bg-a20:      rgba(6,6,10,0.2);
     --bg-a30:      rgba(6,6,10,0.3);
     --bg-a85:      rgba(6,6,10,0.85);
     --bg-a90:      rgba(6,6,10,0.90);
     --bg-a92:      rgba(6,6,10,0.92);
+
     --accent-a10:  rgba(201,162,39,0.1);
     --accent-a30:  rgba(201,162,39,0.3);
     --accent-a40:  rgba(201,162,39,0.4);
     --accent-a50:  rgba(201,162,39,0.5);
     --accent-a70:  rgba(201,162,39,0.7);
+
     --amber-a30:   rgba(196,122,32,0.3);
     --amber-a60:   rgba(196,122,32,0.6);
     --steel-a30:   rgba(74,90,106,0.3);
     --steel-a40:   rgba(74,90,106,0.4);
     --elec-a30:    rgba(56,178,216,0.3);
     --elec-a50:    rgba(56,178,216,0.5);
+
+    /* Era Backgrounds */
     --era-horse:   #1e1200;
     --era-mach:    #090d12;
     --era-robot:   #060c12;
@@ -45,46 +61,62 @@
   }
 
   body.siberian-theme {
+    /* 
+       Theme 2: The Siberian Blue (Future / Robotics)
+       Cold, calculated, highly aware.
+    */
     --bg:          #02040a;
     --surf:        #050914;
     --surf2:       #0a101d;
-    --accent:      #7dc4df;
-    --accent-lt:   #00f2ff;
+    
+    --accent:      #7dc4df; /* Icy Blue */
+    --accent-lt:   #00f2ff; /* Electric Cyan */
     --amber:       #4a8aa5;
     --steel:       #2a4a6a;
     --elec:        #00f2ff;
+    
     --text:        #e0f0f7;
     --muted:       #60809a;
     --border:      #121b28;
     --grid:        #060d16;
+
+    /* Alpha/Opacity Variables for Transitions */
     --bg-a20:      rgba(2,4,10,0.2);
     --bg-a30:      rgba(2,4,10,0.3);
     --bg-a85:      rgba(2,4,10,0.85);
     --bg-a90:      rgba(2,4,10,0.90);
     --bg-a92:      rgba(2,4,10,0.92);
+
     --accent-a10:  rgba(125,196,223,0.1);
     --accent-a30:  rgba(125,196,223,0.3);
     --accent-a40:  rgba(125,196,223,0.4);
     --accent-a50:  rgba(125,196,223,0.5);
     --accent-a70:  rgba(125,196,223,0.7);
+
     --amber-a30:   rgba(74,138,165,0.3);
     --amber-a60:   rgba(74,138,165,0.6);
     --steel-a30:   rgba(42,74,106,0.3);
     --steel-a40:   rgba(42,74,106,0.4);
     --elec-a30:    rgba(0,242,255,0.3);
     --elec-a50:    rgba(0,242,255,0.5);
+
+    /* Era Backgrounds */
     --era-horse:   #02040a;
     --era-mach:    #050914;
     --era-robot:   #071624;
     --era-bridge:  #0a1b2e;
   }
 
+  /* ─────────────────────────────────────────
+     GLOBAL TRANSITIONS (The Melt / Freeze)
+  ───────────────────────────────────────── */
   body, body *, body *::before, body *::after {
     transition-property: background-color, border-color, color, box-shadow, background;
     transition-duration: 1.8s;
     transition-timing-function: ease-in-out;
   }
 
+  /* Overrides to keep hover interactions snappy */
   .btn, .nav-links a, .nav-cta, .invest-email, .invest-option, .tech-mech, .app-card, .id-pillar, .id-pillar-icon, .gi img, .nasa-img img, .app-card::after {
     transition: all 0.3s ease !important;
   }
@@ -102,6 +134,7 @@
     cursor: crosshair;
   }
 
+  /* Grid overlay */
   body::before {
     content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
     background-image:
@@ -110,98 +143,16 @@
     background-size:52px 52px; opacity:0.5;
   }
 
+  /* Grain */
   body::after {
     content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
     background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     opacity:0.45;
   }
 
-  /* ─── PARALLAX HORSE SCENE ─── */
-  #horse-scene {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 46vw;
-    height: 100vh;
-    z-index: 2;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  #horse-scene .hs-hills {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1.4s ease;
-  }
-  #horse-scene .hs-horse {
-    position: absolute;
-    bottom: 28%;
-    right: 6%;
-    width: 38%;
-    opacity: 0;
-    transition: opacity 1.2s ease, transform 0.08s linear;
-    transform-origin: center bottom;
-  }
-  #horse-scene.hills-visible .hs-hills { opacity: 0.82; }
-  #horse-scene.horse-visible .hs-horse { opacity: 1; }
-  #horse-scene.arrested { opacity: 0; transition: opacity 0.8s ease; }
-
-  /* Horse gallop animation */
-  @keyframes gallop-bounce {
-    0%   { transform: translateY(0px) rotate(-1deg); }
-    25%  { transform: translateY(-6px) rotate(1deg); }
-    50%  { transform: translateY(-2px) rotate(-0.5deg); }
-    75%  { transform: translateY(-8px) rotate(1.5deg); }
-    100% { transform: translateY(0px) rotate(-1deg); }
-  }
-  #horse-scene.horse-visible .hs-horse {
-    animation: gallop-bounce 0.55s ease-in-out infinite;
-  }
-  #horse-scene.arrested .hs-horse { animation: none; }
-
-  /* ─── PARALLAX ROBOT SCENE ─── */
-  #robot-scene {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 44vw;
-    height: 100vh;
-    z-index: 2;
-    pointer-events: none;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-  #robot-scene.robot-visible { opacity: 1; }
-  #robot-scene.robot-arrested { opacity: 0; transition: opacity 0.6s ease; }
-
-  #robot-scene .rs-wrap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 60px;
-  }
-  #robot-scene svg {
-    width: 90%;
-    max-width: 420px;
-    height: auto;
-    filter: drop-shadow(0 0 32px rgba(0,242,255,0.18)) drop-shadow(0 0 8px rgba(0,242,255,0.10));
-  }
-
-  /* subtle robot idle sway */
-  @keyframes robot-idle {
-    0%,100% { transform: translateY(0px); }
-    50%      { transform: translateY(-4px); }
-  }
-  #robot-scene.robot-visible svg {
-    animation: robot-idle 3s ease-in-out infinite;
-  }
-
+  /* ─────────────────────────────────────────
+     NAV
+  ───────────────────────────────────────── */
   nav {
     position:fixed; top:0; left:0; right:0; z-index:300;
     display:flex; align-items:center; justify-content:space-between;
@@ -229,12 +180,16 @@
   }
   .nav-cta:hover { background:var(--accent-lt); color:#000; }
 
+  /* ─────────────────────────────────────────
+     SHARED UTILS
+  ───────────────────────────────────────── */
   .z { position:relative; z-index:1; }
   .rv  { opacity:0; transform:translateY(40px); }
   .rvl { opacity:0; transform:translateX(-40px); }
   .rvr { opacity:0; transform:translateX(40px); }
   .rv.on, .rvl.on, .rvr.on { opacity:1; transform:translate(0); }
 
+  /* Section wrappers */
   section { position:relative; z-index:1; }
   .pad { padding:110px 56px; }
   .pad-sm { padding:70px 56px; }
@@ -244,6 +199,9 @@
   .sh-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,64px); letter-spacing:.04em; line-height:1; }
   .sh-line { flex:1; height:1px; background:var(--border); }
 
+  /* ─────────────────────────────────────────
+     HERO
+  ───────────────────────────────────────── */
   .hero {
     min-height:100vh; position:relative; z-index:1;
     display:grid; grid-template-columns:1fr 1fr; overflow:hidden;
@@ -326,6 +284,9 @@
   .hero-stamp-lbl { font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
   .hero-stamp-val { font-size:12px; color:var(--text); line-height:1.6; }
 
+  /* ─────────────────────────────────────────
+     MANIFESTO (the three eras)
+  ───────────────────────────────────────── */
   .manifesto { border-top:1px solid var(--border); }
 
   .era {
@@ -411,6 +372,9 @@
   }
   .gap-bar-label { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
 
+  /* ─────────────────────────────────────────
+     WHO WE ARE
+  ───────────────────────────────────────── */
   #identity { border-top:1px solid var(--border); background:var(--surf); }
   .identity-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
   .id-left { background:var(--bg); padding:72px 56px; }
@@ -436,6 +400,9 @@
   .id-pillar-title { font-size:12px; color:var(--text); margin-bottom:5px; letter-spacing:.06em; }
   .id-pillar-desc { font-size:11px; color:var(--muted); line-height:1.8; }
 
+  /* ─────────────────────────────────────────
+     THE NERVOUS SYSTEM (technology)
+  ───────────────────────────────────────── */
   #tech { border-top:1px solid var(--border); }
   .tech-split { display:grid; grid-template-columns:3fr 2fr; gap:1px; background:var(--border); }
   .tech-main { background:var(--surf); padding:72px 56px; }
@@ -465,6 +432,9 @@
   .tech-mech-title { font-size:12px; color:var(--text); margin-bottom:8px; letter-spacing:.06em; }
   .tech-mech-body { font-size:11px; line-height:1.8; color:var(--muted); }
 
+  /* ─────────────────────────────────────────
+     GALLERY
+  ───────────────────────────────────────── */
   #gallery { border-top:1px solid var(--border); }
   .gal {
     display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:360px 360px;
@@ -485,6 +455,9 @@
     font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
   }
 
+  /* ─────────────────────────────────────────
+     VIDEOS
+  ───────────────────────────────────────── */
   #videos { border-top:1px solid var(--border); background:var(--surf); }
   .videos-inner { padding:72px 56px; }
   .vid-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); margin-top:48px; }
@@ -493,6 +466,9 @@
   .vid-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
   .vid-lbl { padding:16px 20px; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); border-top:1px solid var(--border); }
 
+  /* ─────────────────────────────────────────
+     APPLICATIONS
+  ───────────────────────────────────────── */
   #applications { border-top:1px solid var(--border); }
   .apps-intro { display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:end; margin-bottom:64px; }
   .apps-intro-big { font-family:'Cormorant Garant',serif; font-style:italic; font-size:clamp(36px,5vw,60px); line-height:1.1; color:var(--text); }
@@ -509,6 +485,9 @@
   .app-body { font-size:11px; line-height:1.9; color:var(--muted); }
   .app-status { display:inline-block; margin-top:20px; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
 
+  /* ─────────────────────────────────────────
+     NASA PROOF
+  ───────────────────────────────────────── */
   #nasa { border-top:1px solid var(--border); background:var(--surf); }
   .nasa-inner { display:grid; grid-template-columns:1fr auto; gap:80px; align-items:start; padding:80px 56px; }
   .nasa-tag { font-size:9px; letter-spacing:.35em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
@@ -526,6 +505,9 @@
   .nasa-img img { width:100%; height:100%; object-fit:cover; filter:brightness(.7) grayscale(20%); }
   .nasa-img:hover img { filter:brightness(1) grayscale(0); }
 
+  /* ─────────────────────────────────────────
+     VISION CTA
+  ───────────────────────────────────────── */
   #vision { border-top:1px solid var(--border); overflow:hidden; }
   .vision-wrap { min-height:80vh; position:relative; display:flex; align-items:center; justify-content:center; text-align:center; padding:120px 56px; }
   .vision-bg { position:absolute; inset:0; z-index:0; }
@@ -537,6 +519,9 @@
   .vision-body { font-size:13px; line-height:2.1; color:var(--muted); margin-bottom:52px; }
   .vision-ctas { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
 
+  /* ─────────────────────────────────────────
+     INVEST / CONTACT
+  ───────────────────────────────────────── */
   #invest { border-top:1px solid var(--border); }
   .invest-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
   .invest-left { background:var(--surf); padding:80px 56px; }
@@ -562,6 +547,9 @@
   }
   .invest-email:hover { background:var(--accent-lt); color:#000; }
 
+  /* ─────────────────────────────────────────
+     FOOTER
+  ───────────────────────────────────────── */
   footer {
     position:relative; z-index:1;
     border-top:1px solid var(--border); padding:28px 56px;
@@ -573,6 +561,9 @@
   .ft-links a { font-size:10px; letter-spacing:.12em; color:var(--muted); text-decoration:none; transition:color .2s; }
   .ft-links a:hover { color:var(--accent); }
 
+  /* ─────────────────────────────────────────
+     RESPONSIVE
+  ───────────────────────────────────────── */
   @media(max-width:980px){
     nav { padding:16px 24px; }
     .nav-links li:not(:last-child){ display:none; }
@@ -604,365 +595,10 @@
     .invest-left,.invest-right { padding:60px 24px; }
     .vision-wrap { padding:80px 24px; }
     footer { flex-direction:column; gap:16px; text-align:center; padding:24px; }
-    #horse-scene, #robot-scene { display:none; }
   }
   </style>
 </head>
 <body>
-
-<!-- ═══════════════════════════════════════════
-     HORSE SCENE — fixed, right side
-     Visible: hero → machine era
-     Arrests: when siberian-theme fires
-════════════════════════════════════════════ -->
-<div id="horse-scene">
-  <!-- Rolling hills SVG background -->
-  <svg class="hs-hills" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice"
-       xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-    <defs>
-      <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1a0e04"/>
-        <stop offset="40%" stop-color="#2d1a06"/>
-        <stop offset="100%" stop-color="#0a0804"/>
-      </linearGradient>
-      <linearGradient id="hill-far" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1e3010"/>
-        <stop offset="100%" stop-color="#0f1a08"/>
-      </linearGradient>
-      <linearGradient id="hill-mid" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2a4214"/>
-        <stop offset="100%" stop-color="#14220a"/>
-      </linearGradient>
-      <linearGradient id="hill-near" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1e3010"/>
-        <stop offset="100%" stop-color="#0c1406"/>
-      </linearGradient>
-      <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#243518"/>
-        <stop offset="100%" stop-color="#0d1809"/>
-      </linearGradient>
-      <!-- Warm amber ambient light overlay -->
-      <radialGradient id="warm-light" cx="70%" cy="30%" r="50%">
-        <stop offset="0%" stop-color="#c47a20" stop-opacity="0.18"/>
-        <stop offset="100%" stop-color="#c47a20" stop-opacity="0"/>
-      </radialGradient>
-      <!-- Vignette left -->
-      <linearGradient id="vign-left" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#06060a" stop-opacity="1"/>
-        <stop offset="35%" stop-color="#06060a" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <!-- Sky -->
-    <rect width="900" height="600" fill="url(#sky-grad)"/>
-    <!-- Stars / dust -->
-    <circle cx="120" cy="60" r="1" fill="#c9a22740" opacity="0.6"/>
-    <circle cx="280" cy="40" r="0.8" fill="#c9a22740" opacity="0.5"/>
-    <circle cx="450" cy="25" r="1.2" fill="#c9a22740" opacity="0.4"/>
-    <circle cx="650" cy="55" r="0.9" fill="#c9a22740" opacity="0.6"/>
-    <circle cx="820" cy="35" r="1" fill="#c9a22740" opacity="0.5"/>
-    <circle cx="350" cy="80" r="0.7" fill="#c9a22740" opacity="0.3"/>
-    <circle cx="700" cy="90" r="1.1" fill="#c9a22740" opacity="0.4"/>
-    <!-- Moon hint -->
-    <circle cx="760" cy="70" r="22" fill="#2a1e0e" opacity="0.8"/>
-    <circle cx="755" cy="65" r="20" fill="#c9a227" opacity="0.12"/>
-    <!-- Far hills (horizon) -->
-    <path d="M0,340 Q80,270 160,300 Q240,240 320,280 Q400,230 480,265 Q560,220 640,255 Q720,210 800,240 Q860,225 900,235 L900,600 L0,600Z" fill="url(#hill-far)" opacity="0.7"/>
-    <!-- Mid hills -->
-    <path d="M0,380 Q60,330 140,355 Q220,310 300,340 Q380,295 460,325 Q540,300 620,330 Q700,305 780,330 Q850,315 900,325 L900,600 L0,600Z" fill="url(#hill-mid)" opacity="0.8"/>
-    <!-- Near hills (foreground) -->
-    <path d="M0,430 Q90,390 180,410 Q260,375 360,400 Q440,370 520,395 Q600,375 700,400 Q790,380 900,395 L900,600 L0,600Z" fill="url(#hill-near)"/>
-    <!-- Ground plane -->
-    <rect x="0" y="480" width="900" height="120" fill="url(#ground)"/>
-    <!-- Ground texture lines -->
-    <path d="M0,495 Q225,490 450,493 Q675,496 900,493" stroke="#2a4214" stroke-width="0.5" fill="none" opacity="0.4"/>
-    <path d="M0,510 Q225,506 450,509 Q675,512 900,508" stroke="#2a4214" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <!-- Warm light ambient -->
-    <rect width="900" height="600" fill="url(#warm-light)"/>
-    <!-- Left vignette to blend with page -->
-    <rect width="900" height="600" fill="url(#vign-left)"/>
-    <!-- Bottom vignette -->
-    <rect x="0" y="500" width="900" height="100" fill="url(#sky-grad)" opacity="0.5"/>
-  </svg>
-
-  <!-- Galloping Horse SVG -->
-  <svg class="hs-horse" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="horse-body" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2a1a0a"/>
-        <stop offset="100%" stop-color="#1a0e06"/>
-      </linearGradient>
-      <linearGradient id="horse-glow" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#c47a20" stop-opacity="0.4"/>
-        <stop offset="100%" stop-color="#c47a20" stop-opacity="0"/>
-      </linearGradient>
-      <filter id="horse-shadow">
-        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#c47a20" flood-opacity="0.25"/>
-      </filter>
-    </defs>
-    <g filter="url(#horse-shadow)" transform="translate(20, 10)">
-      <!-- Body -->
-      <ellipse cx="120" cy="110" rx="62" ry="36" fill="url(#horse-body)"/>
-      <!-- Chest -->
-      <ellipse cx="72" cy="118" rx="22" ry="28" fill="#221308"/>
-      <!-- Rump -->
-      <ellipse cx="168" cy="105" rx="26" ry="30" fill="#1e1006"/>
-      <!-- Belly curve -->
-      <path d="M72,138 Q120,155 168,138" fill="#1a0e06"/>
-      <!-- Neck -->
-      <path d="M72,100 Q58,80 52,62 Q56,55 70,58 Q80,75 88,98Z" fill="#221308"/>
-      <!-- Head -->
-      <ellipse cx="46" cy="52" rx="20" ry="14" fill="#2a1a0a" transform="rotate(-20, 46, 52)"/>
-      <!-- Muzzle -->
-      <ellipse cx="32" cy="60" rx="12" ry="8" fill="#221308" transform="rotate(-20, 32, 60)"/>
-      <!-- Nostril -->
-      <ellipse cx="26" cy="62" rx="3" ry="2" fill="#c47a2060" transform="rotate(-20, 26, 62)"/>
-      <!-- Eye -->
-      <circle cx="52" cy="47" r="3" fill="#c9a22799"/>
-      <circle cx="52" cy="47" r="1.5" fill="#c9a22755"/>
-      <!-- Ear -->
-      <path d="M58,38 L62,28 L68,36Z" fill="#1a0e06"/>
-      <!-- Mane flowing back -->
-      <path d="M68,58 Q74,50 80,48 Q86,50 82,58 Q78,55 72,60Z" fill="#0f0804" opacity="0.9"/>
-      <path d="M60,64 Q66,55 72,53 Q76,56 72,64Z" fill="#0f0804" opacity="0.7"/>
-      <!-- Tail flowing back (gallop pose) -->
-      <path d="M178,100 Q195,85 205,75 Q215,65 220,70 Q215,78 208,88 Q200,98 192,108 Q185,112 178,108Z" fill="#0f0804"/>
-      <path d="M182,98 Q198,82 210,72" stroke="#1a0e06" stroke-width="2" fill="none"/>
-      <!-- GALLOP LEGS - extended stride pose -->
-      <!-- Front left (forward) -->
-      <line x1="86" y1="142" x2="70" y2="168" stroke="#221308" stroke-width="8" stroke-linecap="round"/>
-      <line x1="70" y1="168" x2="58" y2="180" stroke="#1a0e06" stroke-width="6" stroke-linecap="round"/>
-      <!-- Front right (forward, extended) -->
-      <line x1="90" y1="146" x2="82" y2="175" stroke="#1e1006" stroke-width="7" stroke-linecap="round"/>
-      <line x1="82" y1="175" x2="76" y2="186" stroke="#1a0e06" stroke-width="5" stroke-linecap="round"/>
-      <!-- Hind left (back, pushing) -->
-      <line x1="152" y1="138" x2="162" y2="165" stroke="#221308" stroke-width="8" stroke-linecap="round"/>
-      <line x1="162" y1="165" x2="170" y2="178" stroke="#1a0e06" stroke-width="6" stroke-linecap="round"/>
-      <!-- Hind right (back, airborne) -->
-      <line x1="158" y1="135" x2="172" y2="158" stroke="#1e1006" stroke-width="7" stroke-linecap="round"/>
-      <line x1="172" y1="158" x2="182" y2="170" stroke="#1a0e06" stroke-width="5" stroke-linecap="round"/>
-      <!-- Hooves -->
-      <ellipse cx="58" cy="181" rx="7" ry="4" fill="#0f0804"/>
-      <ellipse cx="76" cy="187" rx="6" ry="3.5" fill="#0f0804"/>
-      <ellipse cx="170" cy="179" rx="6" ry="3.5" fill="#0f0804"/>
-      <ellipse cx="182" cy="171" rx="5" ry="3" fill="#0f0804"/>
-      <!-- Amber rim light on body -->
-      <path d="M168,80 Q185,90 178,115 Q174,108 165,100Z" fill="#c47a2030"/>
-      <path d="M88,82 Q78,90 75,105" stroke="#c47a2040" stroke-width="2" fill="none"/>
-      <!-- Ground shadow -->
-      <ellipse cx="120" cy="192" rx="75" ry="6" fill="#c47a2020"/>
-    </g>
-  </svg>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ROBOT SCENE — fixed, left side
-     Visible: identity → invest section
-     Arrests: before footer
-════════════════════════════════════════════ -->
-<div id="robot-scene">
-  <div class="rs-wrap">
-    <!-- Robot on EV SVG — Boston Dynamics / ARMAR aesthetic -->
-    <svg viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="ev-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0d1e2e"/>
-          <stop offset="100%" stop-color="#050f1a"/>
-        </linearGradient>
-        <linearGradient id="ev-glass" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#00f2ff" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#7dc4df" stop-opacity="0.05"/>
-        </linearGradient>
-        <linearGradient id="robot-torso" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1a2e3a"/>
-          <stop offset="100%" stop-color="#0d1e2a"/>
-        </linearGradient>
-        <linearGradient id="robot-head" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1e3444"/>
-          <stop offset="100%" stop-color="#0f2030"/>
-        </linearGradient>
-        <linearGradient id="cyan-glow-v" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#00f2ff" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#00f2ff" stop-opacity="0.2"/>
-        </linearGradient>
-        <filter id="cyan-emit" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="robot-glow-f">
-          <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#00f2ff" flood-opacity="0.3"/>
-          <feDropShadow dx="0" dy="4" stdDeviation="18" flood-color="#00f2ff" flood-opacity="0.15"/>
-        </filter>
-        <!-- Right vignette to blend with page -->
-        <linearGradient id="vign-right" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="60%" stop-color="#02040a" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#02040a" stop-opacity="1"/>
-        </linearGradient>
-        <radialGradient id="ground-glow" cx="50%" cy="100%" r="50%">
-          <stop offset="0%" stop-color="#00f2ff" stop-opacity="0.12"/>
-          <stop offset="100%" stop-color="#00f2ff" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-
-      <!-- Ground glow -->
-      <ellipse cx="200" cy="490" rx="180" ry="24" fill="url(#ground-glow)"/>
-
-      <g filter="url(#robot-glow-f)">
-
-        <!-- ── EV CAR BODY ── -->
-        <!-- Main body -->
-        <path d="M30,400 Q30,380 50,375 L100,365 Q130,320 170,312 Q200,308 230,312 Q270,308 300,320 L350,365 L355,375 Q370,380 370,400 L370,440 Q370,455 350,455 L50,455 Q30,455 30,440Z" fill="url(#ev-body)" stroke="#1a3a4a" stroke-width="1.5"/>
-        <!-- Windshield -->
-        <path d="M130,365 Q155,315 200,308 Q245,308 270,365Z" fill="url(#ev-glass)" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.4"/>
-        <!-- Side windows -->
-        <path d="M96,365 Q110,340 132,332 L130,365Z" fill="url(#ev-glass)" stroke="#00f2ff" stroke-width="0.6" stroke-opacity="0.3"/>
-        <path d="M270,365 L268,332 Q290,340 305,365Z" fill="url(#ev-glass)" stroke="#00f2ff" stroke-width="0.6" stroke-opacity="0.3"/>
-        <!-- Door lines -->
-        <line x1="200" y1="365" x2="200" y2="445" stroke="#1a3a4a" stroke-width="1" opacity="0.6"/>
-        <!-- Body trim lines (cyan) -->
-        <path d="M50,390 L350,390" stroke="#00f2ff" stroke-width="0.5" opacity="0.3"/>
-        <path d="M40,412 Q200,408 360,412" stroke="#00f2ff" stroke-width="0.4" opacity="0.2"/>
-        <!-- Front bumper -->
-        <path d="M30,430 Q20,432 22,445 L50,455" stroke="#1a3a4a" stroke-width="1.5" fill="none"/>
-        <path d="M370,430 Q380,432 378,445 L350,455" stroke="#1a3a4a" stroke-width="1.5" fill="none"/>
-        <!-- Headlights -->
-        <rect x="34" y="415" width="22" height="8" rx="2" fill="#00f2ff" opacity="0.8"/>
-        <rect x="34" y="415" width="22" height="8" rx="2" fill="#00f2ff" opacity="0.4" filter="url(#cyan-emit)"/>
-        <rect x="344" y="415" width="22" height="8" rx="2" fill="#00f2ff" opacity="0.8"/>
-        <rect x="344" y="415" width="22" height="8" rx="2" fill="#00f2ff" opacity="0.4" filter="url(#cyan-emit)"/>
-        <!-- Door handles -->
-        <rect x="148" y="405" width="18" height="4" rx="2" fill="#00f2ff" opacity="0.5"/>
-        <rect x="234" y="405" width="18" height="4" rx="2" fill="#00f2ff" opacity="0.5"/>
-        <!-- P5719 badge -->
-        <rect x="187" y="443" width="26" height="10" rx="1" fill="#0a1e2e" stroke="#00f2ff" stroke-width="0.6" opacity="0.8"/>
-        <text x="200" y="451" text-anchor="middle" fill="#00f2ff" font-family="monospace" font-size="5" opacity="0.9">P5719</text>
-        <!-- Wheels -->
-        <circle cx="90" cy="458" r="28" fill="#060e16" stroke="#1a3a4a" stroke-width="2"/>
-        <circle cx="90" cy="458" r="18" fill="#0a1828" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.4"/>
-        <circle cx="90" cy="458" r="6" fill="#00f2ff" opacity="0.6"/>
-        <!-- Wheel spokes -->
-        <line x1="90" y1="440" x2="90" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="90" y1="476" x2="90" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="72" y1="458" x2="90" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="108" y1="458" x2="90" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="77" y1="445" x2="90" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="103" y1="445" x2="90" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="77" y1="471" x2="90" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="103" y1="471" x2="90" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        
-        <circle cx="310" cy="458" r="28" fill="#060e16" stroke="#1a3a4a" stroke-width="2"/>
-        <circle cx="310" cy="458" r="18" fill="#0a1828" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.4"/>
-        <circle cx="310" cy="458" r="6" fill="#00f2ff" opacity="0.6"/>
-        <line x1="310" y1="440" x2="310" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="310" y1="476" x2="310" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="292" y1="458" x2="310" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="328" y1="458" x2="310" y2="458" stroke="#00f2ff" stroke-width="1.5" opacity="0.5"/>
-        <line x1="297" y1="445" x2="310" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="323" y1="445" x2="310" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="297" y1="471" x2="310" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="323" y1="471" x2="310" y2="458" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-
-        <!-- ── ROBOT SITTING ON ROOF ── -->
-        <!-- Robot pelvis / seat mount on car roof -->
-        <rect x="170" y="300" width="60" height="14" rx="4" fill="#0f2030" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.5"/>
-        <!-- Spine/lower torso connector -->
-        <rect x="190" y="258" width="20" height="44" rx="3" fill="#0d1e2e" stroke="#1a3a4a" stroke-width="1"/>
-        <!-- Torso -->
-        <rect x="168" y="200" width="64" height="62" rx="8" fill="url(#robot-torso)" stroke="#00f2ff" stroke-width="1" stroke-opacity="0.5"/>
-        <!-- Torso panel detail -->
-        <rect x="178" y="210" width="44" height="32" rx="4" fill="#0a1828" stroke="#00f2ff" stroke-width="0.6" stroke-opacity="0.3"/>
-        <!-- Chest emitter / core -->
-        <circle cx="200" cy="226" r="12" fill="#0a1828" stroke="#00f2ff" stroke-width="1" stroke-opacity="0.6"/>
-        <circle cx="200" cy="226" r="7" fill="#00f2ff" opacity="0.15"/>
-        <circle cx="200" cy="226" r="3.5" fill="#00f2ff" opacity="0.9"/>
-        <!-- Chest core glow -->
-        <circle cx="200" cy="226" r="3.5" fill="#00f2ff" filter="url(#cyan-emit)"/>
-        <!-- Torso side vents -->
-        <line x1="170" y1="218" x2="178" y2="218" stroke="#00f2ff" stroke-width="1" opacity="0.5"/>
-        <line x1="170" y1="224" x2="178" y2="224" stroke="#00f2ff" stroke-width="1" opacity="0.4"/>
-        <line x1="170" y1="230" x2="178" y2="230" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <line x1="222" y1="218" x2="230" y2="218" stroke="#00f2ff" stroke-width="1" opacity="0.5"/>
-        <line x1="222" y1="224" x2="230" y2="224" stroke="#00f2ff" stroke-width="1" opacity="0.4"/>
-        <line x1="222" y1="230" x2="230" y2="230" stroke="#00f2ff" stroke-width="1" opacity="0.3"/>
-        <!-- Shoulder joints -->
-        <circle cx="162" cy="208" r="10" fill="#0f2030" stroke="#00f2ff" stroke-width="1.2" stroke-opacity="0.6"/>
-        <circle cx="162" cy="208" r="5" fill="#00f2ff" opacity="0.2"/>
-        <circle cx="238" cy="208" r="10" fill="#0f2030" stroke="#00f2ff" stroke-width="1.2" stroke-opacity="0.6"/>
-        <circle cx="238" cy="208" r="5" fill="#00f2ff" opacity="0.2"/>
-        <!-- Left arm — casual rest on knee, Boston Dynamics pose -->
-        <line x1="152" y1="212" x2="130" y2="248" stroke="#1a3a4a" stroke-width="8" stroke-linecap="round"/>
-        <circle cx="130" cy="248" r="6" fill="#0f2030" stroke="#00f2ff" stroke-width="1" stroke-opacity="0.5"/>
-        <line x1="130" y1="254" x2="118" y2="290" stroke="#1a3a4a" stroke-width="7" stroke-linecap="round"/>
-        <!-- Left hand (open, forward) -->
-        <ellipse cx="116" cy="294" rx="8" ry="6" fill="#0d1e2e" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.5"/>
-        <line x1="110" y1="292" x2="106" y2="302" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="115" y1="290" x2="112" y2="302" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="120" y1="290" x2="119" y2="302" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="124" y1="292" x2="125" y2="302" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-        <!-- Right arm — relaxed, hand pointing forward/down -->
-        <line x1="248" y1="212" x2="268" y2="246" stroke="#1a3a4a" stroke-width="8" stroke-linecap="round"/>
-        <circle cx="268" cy="246" r="6" fill="#0f2030" stroke="#00f2ff" stroke-width="1" stroke-opacity="0.5"/>
-        <line x1="268" y1="252" x2="278" y2="288" stroke="#1a3a4a" stroke-width="7" stroke-linecap="round"/>
-        <!-- Right hand -->
-        <ellipse cx="280" cy="292" rx="8" ry="6" fill="#0d1e2e" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.5"/>
-        <line x1="274" y1="290" x2="271" y2="300" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="279" y1="289" x2="278" y2="301" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="284" y1="290" x2="285" y2="301" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="288" y1="293" x2="291" y2="302" stroke="#00f2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-        <!-- Neck -->
-        <rect x="192" y="182" width="16" height="20" rx="3" fill="#0d1e2e" stroke="#1a3a4a" stroke-width="1"/>
-        <!-- Neck cable detail -->
-        <line x1="196" y1="183" x2="196" y2="200" stroke="#00f2ff" stroke-width="0.8" opacity="0.3"/>
-        <line x1="200" y1="182" x2="200" y2="200" stroke="#00f2ff" stroke-width="0.8" opacity="0.4"/>
-        <line x1="204" y1="183" x2="204" y2="200" stroke="#00f2ff" stroke-width="0.8" opacity="0.3"/>
-        <!-- HEAD -->
-        <rect x="174" y="140" width="52" height="44" rx="10" fill="url(#robot-head)" stroke="#00f2ff" stroke-width="1.2" stroke-opacity="0.6"/>
-        <!-- Faceplate visor -->
-        <rect x="180" y="150" width="40" height="18" rx="4" fill="#00f2ff" opacity="0.08" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.4"/>
-        <!-- Eyes — dual LED sensors -->
-        <rect x="184" y="155" width="12" height="6" rx="2" fill="#00f2ff" opacity="0.9"/>
-        <rect x="184" y="155" width="12" height="6" rx="2" fill="#00f2ff" filter="url(#cyan-emit)" opacity="0.5"/>
-        <rect x="204" y="155" width="12" height="6" rx="2" fill="#00f2ff" opacity="0.9"/>
-        <rect x="204" y="155" width="12" height="6" rx="2" fill="#00f2ff" filter="url(#cyan-emit)" opacity="0.5"/>
-        <!-- Scanning line across visor -->
-        <line x1="180" y1="162" x2="220" y2="162" stroke="#00f2ff" stroke-width="0.8" opacity="0.3"/>
-        <!-- Top of head sensors -->
-        <circle cx="192" cy="140" r="3" fill="#00f2ff" opacity="0.6"/>
-        <circle cx="200" cy="137" r="3.5" fill="#00f2ff" opacity="0.8"/>
-        <circle cx="208" cy="140" r="3" fill="#00f2ff" opacity="0.6"/>
-        <!-- Antenna nubs -->
-        <line x1="200" y1="137" x2="200" y2="126" stroke="#00f2ff" stroke-width="1.5" opacity="0.7"/>
-        <circle cx="200" cy="124" r="3" fill="#00f2ff" opacity="0.9"/>
-        <circle cx="200" cy="124" r="3" fill="#00f2ff" filter="url(#cyan-emit)" opacity="0.6"/>
-        <!-- Head side panels -->
-        <rect x="174" y="152" width="6" height="12" rx="1" fill="#0a1828" stroke="#00f2ff" stroke-width="0.6" stroke-opacity="0.4"/>
-        <rect x="220" y="152" width="6" height="12" rx="1" fill="#0a1828" stroke="#00f2ff" stroke-width="0.6" stroke-opacity="0.4"/>
-        <!-- Chin detail -->
-        <rect x="190" y="178" width="20" height="5" rx="1" fill="#00f2ff" opacity="0.15" stroke="#00f2ff" stroke-width="0.5" stroke-opacity="0.4"/>
-
-        <!-- Energy conduit on torso -->
-        <line x1="200" y1="238" x2="200" y2="258" stroke="url(#cyan-glow-v)" stroke-width="2" opacity="0.7"/>
-
-        <!-- Knee joints sitting on hood (robot is seated on roof, legs bent over windshield) -->
-        <circle cx="178" cy="290" r="8" fill="#0f2030" stroke="#00f2ff" stroke-width="1" stroke-opacity="0.5"/>
-        <circle cx="222" cy="290" r="8" fill="#0f2030" stroke="#00f2ff" stroke-width="1" stroke-opacity="0.5"/>
-        <!-- Lower legs angled forward/down over windshield -->
-        <line x1="178" y1="298" x2="165" y2="336" stroke="#1a3a4a" stroke-width="8" stroke-linecap="round"/>
-        <line x1="222" y1="298" x2="235" y2="336" stroke="#1a3a4a" stroke-width="8" stroke-linecap="round"/>
-        <!-- Feet -->
-        <rect x="155" y="334" width="22" height="10" rx="4" fill="#0d1e2e" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.5"/>
-        <rect x="223" y="334" width="22" height="10" rx="4" fill="#0d1e2e" stroke="#00f2ff" stroke-width="0.8" stroke-opacity="0.5"/>
-        <!-- Foot toe details -->
-        <line x1="156" y1="339" x2="176" y2="339" stroke="#00f2ff" stroke-width="0.8" opacity="0.4"/>
-        <line x1="224" y1="339" x2="244" y2="339" stroke="#00f2ff" stroke-width="0.8" opacity="0.4"/>
-
-      </g>
-
-      <!-- Right page vignette overlay -->
-      <rect width="400" height="520" fill="url(#vign-right)"/>
-    </svg>
-  </div>
-</div>
-
 
 <!-- ────────────────── NAV ────────────────── -->
 <nav>
@@ -985,20 +621,24 @@
 
   <div class="hero-left">
     <div class="hero-tag rv">Robotics × Automotive · Est. 2024</div>
+
     <h1 class="hero-hl rv">
       The Vehicle
       <em>That Knows</em>
       You're There.
     </h1>
+
     <p class="hero-poem rv">
       We began with a sentient horse.<br/>
       We traded it for a machine that forgot us.<br/>
       Passengers5719 closes the loop.
     </p>
+
     <div class="hero-ctas rv">
       <a href="#manifesto" class="btn btn-fill">Read the Manifesto</a>
       <a href="#invest" class="btn btn-line">Partner With Us →</a>
     </div>
+
     <div class="hero-numbers rv">
       <div class="hero-num">
         <div class="hero-num-val">54</div>
@@ -1016,7 +656,10 @@
   </div>
 
   <div class="hero-right">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj9JVnsoZKeSp6RNijt8Refux-WJFywMCIK185ayDhcYGjf0HmgM-2t-2w-VX81Oxol0pphLUZszU-F9PwYTyF9IqhfpLgjLQar6qK-JKoZEU3QoO-71RfYF2H2Ut8HLAfbwQpFoPlCzOeUOPQM-djiHRzzGNAqDb8olUaSVNJohKvabjJStmWMoDSFEY/s5712/IMG_5032.jpeg" alt="Passengers5719 — 54-Spoke Self-Propelling Wheel"/>
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj9JVnsoZKeSp6RNijt8Refux-WJFywMCIK185ayDhcYGjf0HmgM-2t-2w-VX81Oxol0pphLUZszU-F9PwYTyF9IqhfpLgjLQar6qK-JKoZEU3QoO-71RfYF2H2Ut8HLAfbwQpFoPlCzOeUOPQM-djiHRzzGNAqDb8olUaSVNJohKvabjJStmWMoDSFEY/s5712/IMG_5032.jpeg"
+      alt="Passengers5719 — 54-Spoke Self-Propelling Wheel"
+    />
     <div class="hero-right-veil"></div>
     <div class="hero-stamp">
       <div class="hero-stamp-lbl">★ NASA Validated · 2025</div>
@@ -1025,18 +668,23 @@
   </div>
 </section>
 
-<!-- ────────────────── MANIFESTO ────────────────── -->
+<!-- ────────────────── MANIFESTO (The Three Eras) ────────────────── -->
 <div id="manifesto" class="manifesto">
 
-  <div class="era era-horse" id="era-horse-section">
+  <!-- Era 1: The Horse -->
+  <div class="era era-horse">
     <div class="era-grid rv">
       <div class="era-num-col">
         <div class="era-epoch amber">I</div>
         <div class="era-era-label amber">The Horse Era</div>
-        <div class="era-eye amber"><div class="era-eye-inner"></div></div>
+        <div class="era-eye amber">
+          <div class="era-eye-inner"></div>
+        </div>
       </div>
       <div class="era-body-col">
-        <h2 class="era-headline amber">"10,000 years ago,<br/>transportation was alive."</h2>
+        <h2 class="era-headline amber">
+          "10,000 years ago,<br/>transportation was alive."
+        </h2>
         <div class="era-body">
           <p>You climbed onto a horse. It felt your weight shift before you pulled the reins. It read the tension in your legs, the hesitation in your posture, the urgency in your hands. It knew when you were afraid. It adjusted.</p>
           <p>Transportation was not a service you used. It was a <strong>relationship you had.</strong> The horse was an extension of your nervous system. It sensed the world on your behalf, responded to you, and carried you not as cargo — but as a partner.</p>
@@ -1047,20 +695,26 @@
     </div>
   </div>
 
+  <!-- Gap bar -->
   <div class="gap-bar">
     <div class="gap-bar-text">"Then we built the engine. And the vehicle forgot we existed."</div>
     <div class="gap-bar-label">The Great Disconnection</div>
   </div>
 
+  <!-- Era 2: The Machine -->
   <div class="era era-mach">
     <div class="era-grid flip rv">
       <div class="era-num-col">
         <div class="era-epoch steel">II</div>
         <div class="era-era-label steel">The Machine Era</div>
-        <div class="era-eye steel"><div class="era-eye-inner"></div></div>
+        <div class="era-eye steel">
+          <div class="era-eye-inner"></div>
+        </div>
       </div>
       <div class="era-body-col">
-        <h2 class="era-headline steel">"Faster. More powerful.<br/>Completely indifferent to you."</h2>
+        <h2 class="era-headline steel">
+          "Faster. More powerful.<br/>Completely indifferent to you."
+        </h2>
         <div class="era-body">
           <p>The automobile was a revolution in speed and range. It was not a revolution in relationship. The engine does not feel you. The gearbox does not know you are there. The wheel — the only part touching the earth — is the most passive component in the system.</p>
           <p>You became <strong>cargo.</strong> The vehicle moved you the way a conveyor belt moves a box. It had no awareness of who you were, how you were sitting, what the road ahead felt like, or whether it could do better for you today than it did yesterday.</p>
@@ -1071,20 +725,26 @@
     </div>
   </div>
 
+  <!-- Gap bar 2 -->
   <div class="gap-bar">
     <div class="gap-bar-text">"Now we build robots that sense, adapt, and think. But somehow the vehicle is still the dumbest object in the room."</div>
     <div class="gap-bar-label">The Unfinished Revolution</div>
   </div>
 
-  <div class="era era-robot" id="era-robot-section">
+  <!-- Era 3: The Robot -->
+  <div class="era era-robot">
     <div class="era-grid rv">
       <div class="era-num-col">
         <div class="era-epoch elec">III</div>
         <div class="era-era-label elec">The Robot Era</div>
-        <div class="era-eye elec"><div class="era-eye-inner"></div></div>
+        <div class="era-eye elec">
+          <div class="era-eye-inner"></div>
+        </div>
       </div>
       <div class="era-body-col">
-        <h2 class="era-headline elec">"Robots are sentient.<br/>Cars are still not."</h2>
+        <h2 class="era-headline elec">
+          "Robots are sentient.<br/>Cars are still not."
+        </h2>
         <div class="era-body">
           <p>Today we build machines that sense, adapt, reason, and respond. Boston Dynamics robots read the ground beneath their feet 1,000 times per second. Surgical robots detect tremors in a human hand and compensate in real time. Industrial arms feel force feedback at micron-level precision.</p>
           <p>Meanwhile, the vehicle carrying you home is still fundamentally a <strong>dumb machine</strong> with a steering wheel bolted onto it. It does not feel the road. Its wheels do not think. Its propulsion system has no awareness of the surface it touches.</p>
@@ -1095,15 +755,20 @@
     </div>
   </div>
 
+  <!-- The Bridge -->
   <div class="era era-bridge">
     <div class="era-grid flip rv">
       <div class="era-num-col">
         <div class="era-epoch gap">IV</div>
         <div class="era-era-label gap">Passengers5719</div>
-        <div class="era-eye gap alive"><div class="era-eye-inner"></div></div>
+        <div class="era-eye gap alive">
+          <div class="era-eye-inner"></div>
+        </div>
       </div>
       <div class="era-body-col">
-        <h2 class="era-headline gold">"We are closing the loop.<br/>The vehicle is becoming alive again."</h2>
+        <h2 class="era-headline gold">
+          "We are closing the loop.<br/>The vehicle is becoming alive again."
+        </h2>
         <div class="era-body">
           <p>Passengers5719 exists to bridge the gap between the sentience of robotics and the kinetic power of the automobile. We are not adding sensors to cars. We are not building software layers on top of existing mechanics.</p>
           <p>We are <strong>rebuilding the vehicle from the wheel outward</strong> — starting with the one component that touches the world, and giving it the intelligence to understand what it touches. A wheel that feels the ground. A vehicle that knows it is moving. A machine that is, finally, aware of its passenger.</p>
@@ -1134,7 +799,9 @@
         <span class="id-formula-op">=</span>
         <span class="id-formula-term result">P5719</span>
       </div>
-      <p class="id-headline">"We are not an automotive company that added software. We are not a robotics company that added wheels. We are what happens when you refuse to accept the distinction."</p>
+      <p class="id-headline">
+        "We are not an automotive company that added software. We are not a robotics company that added wheels. We are what happens when you refuse to accept the distinction."
+      </p>
       <div class="id-body">
         <p>Passengers5719 is a robotics-automotive engineering company. We design and build the foundational technologies that transform passive vehicle components into intelligent, responsive, self-aware systems.</p>
         <p>Our founder, Jamal Syed — two-time NASA Challenge winner — has spent years working at the intersection of precision engineering and aerospace hardware. Passengers5719 is the synthesis of that work: a company that treats the vehicle not as a container for passengers, but as a machine with a nervous system of its own.</p>
@@ -1175,7 +842,7 @@
   </div>
 </section>
 
-<!-- ────────────────── THE NERVOUS SYSTEM ────────────────── -->
+<!-- ────────────────── THE NERVOUS SYSTEM (Technology) ────────────────── -->
 <section id="tech">
   <div class="pad">
     <div class="sh rv">
@@ -1186,11 +853,22 @@
   </div>
   <div class="tech-split rv">
     <div class="tech-main">
-      <h3 class="tech-headline">The 54-Spoke<em>Self-Propelling Wheel</em></h3>
+      <h3 class="tech-headline">
+        The 54-Spoke
+        <em>Self-Propelling Wheel</em>
+      </h3>
       <p class="tech-body">
-        Our foundation technology — and the world's first proof of principle — is the 54-Spoke Self-Propelling Wheel. Fifty-four independently compliant spokes, each engineered to dynamically engage and disengage in a precisely timed sequence, converting the wheel's own rotation into forward propulsion. No motor. No transmission. No passive component where an active one can exist.
+        Our foundation technology — and the world's first proof of principle — is the
+        54-Spoke Self-Propelling Wheel. Fifty-four independently compliant spokes, each
+        engineered to dynamically engage and disengage in a precisely timed sequence,
+        converting the wheel's own rotation into forward propulsion. No motor. No transmission.
+        No passive component where an active one can exist.
         <br/><br/>
-        This is not a wheel with a motor inside it. It is a wheel that <em>is</em> the motor. The distinction is the entire point. When propulsion is integral to the wheel, the vehicle is no longer a chassis carrying an engine — it is a system where every load-bearing component is also a force-generating one. The line between structure and intelligence dissolves.
+        This is not a wheel with a motor inside it. It is a wheel that <em>is</em> the motor.
+        The distinction is the entire point. When propulsion is integral to the wheel,
+        the vehicle is no longer a chassis carrying an engine — it is a system where
+        every load-bearing component is also a force-generating one.
+        The line between structure and intelligence dissolves.
       </p>
       <div class="tech-mechanisms">
         <div class="tech-mech">
@@ -1268,13 +946,21 @@
     <div class="vid-grid rv">
       <div class="vid-item">
         <div class="vid-wrap">
-          <iframe src="https://www.blogger.com/video.g?token=AD6v5dyV4yWyIzOM3nNvA4mBYtgoJZvRUT39sIvldC-C1v173LWSESKr8UyueOQsRhPsCUseFKxtK4YF583HMHU7WjRVv5IGixuqVGQPeWzlzbdZrAvye217b-Lm9cZThGww1EjpVRI&origin=jamalsyedcadportfolio.blogspot.com" allowfullscreen title="54-Spoke Wheel — Build & Test Video 1"></iframe>
+          <iframe
+            src="https://www.blogger.com/video.g?token=AD6v5dyV4yWyIzOM3nNvA4mBYtgoJZvRUT39sIvldC-C1v173LWSESKr8UyueOQsRhPsCUseFKxtK4YF583HMHU7WjRVv5IGixuqVGQPeWzlzbdZrAvye217b-Lm9cZThGww1EjpVRI&origin=jamalsyedcadportfolio.blogspot.com"
+            allowfullscreen
+            title="54-Spoke Wheel — Build & Test Video 1"
+          ></iframe>
         </div>
         <div class="vid-lbl">Build &amp; Test · Video 01 — Wheel in Motion</div>
       </div>
       <div class="vid-item">
         <div class="vid-wrap">
-          <iframe src="https://www.blogger.com/video.g?token=AD6v5dxl0bUcv0DVnWZPwXhYHkxTKC4aEqpO3euSWRzcMVp1go9_RrHFJJl6-fNGOc4Q2Ddual6OwZsxMIRt80BF5lMoSguexmOfAe3xtNEsJGU407CCPGLreG-M62eU9F-HrTofUwg1&origin=jamalsyedcadportfolio.blogspot.com" allowfullscreen title="54-Spoke Wheel — Build & Test Video 2"></iframe>
+          <iframe
+            src="https://www.blogger.com/video.g?token=AD6v5dxl0bUcv0DVnWZPwXhYHkxTKC4aEqpO3euSWRzcMVp1go9_RrHFJJl6-fNGOc4Q2Ddual6OwZsxMIRt80BF5lMoSguexmOfAe3xtNEsJGU407CCPGLreG-M62eU9F-HrTofUwg1&origin=jamalsyedcadportfolio.blogspot.com"
+            allowfullscreen
+            title="54-Spoke Wheel — Build & Test Video 2"
+          ></iframe>
         </div>
         <div class="vid-lbl">Build &amp; Test · Video 02 — Fabrication Documentation</div>
       </div>
@@ -1292,37 +978,63 @@
     </div>
     <div class="apps-intro rv">
       <p class="apps-intro-big">Every vehicle that moves, moves better when it knows it's moving.</p>
-      <p class="apps-intro-body">Our technology is not a single product. It is a platform — a foundational rethinking of what the vehicle component can be. Wherever there is a wheel carrying a person or a payload, there is an opportunity to replace a passive mechanism with an intelligent one. The applications below are the first wave. They are not the limit.</p>
+      <p class="apps-intro-body">
+        Our technology is not a single product. It is a platform — a foundational rethinking of
+        what the vehicle component can be. Wherever there is a wheel carrying a person or a payload,
+        there is an opportunity to replace a passive mechanism with an intelligent one. The applications
+        below are the first wave. They are not the limit.
+      </p>
     </div>
     <div class="apps-grid rv">
       <div class="app-card featured">
         <span class="app-glyph">🤖</span>
         <div class="app-title">Robotic Mobility Platforms</div>
-        <p class="app-body">The foundational application: autonomous platforms where propulsion, sensing, and terrain adaptation are unified in a single wheel-level system. No separate motor controller. No drivetrain to route torque through. The wheel senses the terrain and adapts its compliance and propulsion thrust in the same mechanical action — the way a horse's hoof loads and pushes in one continuous motion. This is the ground truth of what a robotic vehicle should be.</p>
+        <p class="app-body">
+          The foundational application: autonomous platforms where propulsion, sensing, and terrain adaptation
+          are unified in a single wheel-level system. No separate motor controller. No drivetrain to route
+          torque through. The wheel senses the terrain and adapts its compliance and propulsion thrust in
+          the same mechanical action — the way a horse's hoof loads and pushes in one continuous motion.
+          This is the ground truth of what a robotic vehicle should be.
+        </p>
         <span class="app-status">Foundation Platform · Active Development</span>
       </div>
       <div class="app-card">
         <span class="app-glyph">🚲</span>
         <div class="app-title">Intelligent E-Mobility</div>
-        <p class="app-body">E-bikes, scooters, and personal mobility vehicles where propulsion emerges from the wheel itself. No hub motor bulk. No chain drivetrain. A bicycle that feels traditional and moves like it's alive.</p>
+        <p class="app-body">
+          E-bikes, scooters, and personal mobility vehicles where propulsion emerges
+          from the wheel itself. No hub motor bulk. No chain drivetrain. A bicycle that
+          feels traditional and moves like it's alive.
+        </p>
         <span class="app-status">Target Market · E-Bikes $50B+ by 2030</span>
       </div>
       <div class="app-card">
         <span class="app-glyph">♿</span>
         <div class="app-title">Adaptive Assistive Mobility</div>
-        <p class="app-body">Wheelchairs and mobility aids that sense incline, load, and user intent at the wheel — responding before the user must compensate. Restoring the felt connection between person and vehicle for those who need it most.</p>
+        <p class="app-body">
+          Wheelchairs and mobility aids that sense incline, load, and user intent at the
+          wheel — responding before the user must compensate. Restoring the felt connection
+          between person and vehicle for those who need it most.
+        </p>
         <span class="app-status">High Impact · Aging Population</span>
       </div>
       <div class="app-card">
         <span class="app-glyph">🛸</span>
         <div class="app-title">Aerospace &amp; Planetary Rovers</div>
-        <p class="app-body">Airless, self-propelling wheels for planetary surface traversal. Validated by NASA directly — our 18-inch prototype was evaluated at Johnson Space Center. No pneumatics to fail. No drivetrain to jam with regolith. Intelligence in the wheel.</p>
+        <p class="app-body">
+          Airless, self-propelling wheels for planetary surface traversal. Validated
+          by NASA directly — our 18-inch prototype was evaluated at Johnson Space Center.
+          No pneumatics to fail. No drivetrain to jam with regolith. Intelligence in the wheel.
+        </p>
         <span class="app-status">NASA Validated · 2025 Award Winner</span>
       </div>
       <div class="app-card">
         <span class="app-glyph">📦</span>
         <div class="app-title">Last-Mile &amp; Logistics</div>
-        <p class="app-body">Lightweight urban delivery vehicles with zero drivetrain maintenance overhead. A wheel that is its own engine means a fleet that doesn't stop for gearbox service.</p>
+        <p class="app-body">
+          Lightweight urban delivery vehicles with zero drivetrain maintenance overhead.
+          A wheel that is its own engine means a fleet that doesn't stop for gearbox service.
+        </p>
         <span class="app-status">Urban Logistics Boom</span>
       </div>
     </div>
@@ -1335,7 +1047,15 @@
     <div>
       <div class="nasa-tag">Aerospace Validated</div>
       <h2 class="nasa-hl">Proven by<br/><em>NASA. Twice.</em></h2>
-      <p class="nasa-body">Our technology is not theoretical. An 18-inch physical prototype was fabricated, documented to full commercial and DoD shipping standards, and shipped from Bammental, Germany to NASA Johnson Space Center in Houston, Texas for hands-on evaluation. NASA engineers held it, loaded it, and assessed it. The result: our second NASA challenge win — following the 2023 Particulate Partition award. This is the most direct validation available to an engineering startup: not a pitch deck score, not a simulation result — a real object, in NASA's hands.</p>
+      <p class="nasa-body">
+        Our technology is not theoretical. An 18-inch physical prototype was fabricated,
+        documented to full commercial and DoD shipping standards, and shipped from
+        Bammental, Germany to NASA Johnson Space Center in Houston, Texas for hands-on
+        evaluation. NASA engineers held it, loaded it, and assessed it.
+        The result: our second NASA challenge win — following the 2023 Particulate
+        Partition award. This is the most direct validation available to an engineering
+        startup: not a pitch deck score, not a simulation result — a real object, in NASA's hands.
+      </p>
       <div class="nasa-wins">
         <div class="nasa-win">
           <div class="nasa-win-yr">★ 2025</div>
@@ -1364,8 +1084,21 @@
     </div>
     <div class="vision-content rv">
       <div class="vision-eyebrow">The Long Vision · Passengers5719</div>
-      <h2 class="vision-hl">"The next vehicle you ride<br/>will know you are there.<br/>It will feel you the way<br/>a horse once did."</h2>
-      <p class="vision-body">We are at the beginning of the longest engineering journey in transportation history — the restoration of the relationship between human and vehicle. Not through screens, not through voice commands, not through sensors bolted onto a century-old chassis. Through a fundamental redesign of the vehicle itself, starting where the vehicle meets the world: the wheel.<br/><br/>A new generation of vehicles — lighter, more aware, more intuitive than anything on the road today. Not dumb machines carrying sentient people. Sentient systems moving with them.</p>
+      <h2 class="vision-hl">
+        "The next vehicle you ride<br/>will know you are there.<br/>
+        It will feel you the way<br/>a horse once did."
+      </h2>
+      <p class="vision-body">
+        We are at the beginning of the longest engineering journey in transportation history —
+        the restoration of the relationship between human and vehicle. Not through screens,
+        not through voice commands, not through sensors bolted onto a century-old chassis.
+        Through a fundamental redesign of the vehicle itself, starting where the vehicle
+        meets the world: the wheel.
+        <br/><br/>
+        A new generation of vehicles — lighter, more aware, more intuitive than anything
+        on the road today. Not dumb machines carrying sentient people. Sentient systems
+        moving with them.
+      </p>
       <div class="vision-ctas">
         <a href="#invest" class="btn btn-fill">Join the Revolution</a>
         <a href="#tech" class="btn btn-line" style="color:rgba(228,226,219,.5);border-color:rgba(228,226,219,.2)">The Technology →</a>
@@ -1378,8 +1111,15 @@
 <section id="invest">
   <div class="invest-grid rv">
     <div class="invest-left">
-      <h2 class="invest-hl">Fuel the<em>Next Stage.</em></h2>
-      <p class="invest-sub">We are seeking seed funding to move from proven prototype to market-ready platform. The concept is validated. The physics is proven. NASA has evaluated it with their hands. Now we scale.</p>
+      <h2 class="invest-hl">
+        Fuel the
+        <em>Next Stage.</em>
+      </h2>
+      <p class="invest-sub">
+        We are seeking seed funding to move from proven prototype to market-ready
+        platform. The concept is validated. The physics is proven. NASA has evaluated it
+        with their hands. Now we scale.
+      </p>
       <div class="invest-steps">
         <div class="invest-step">
           <div class="invest-step-n">1</div>
@@ -1411,6 +1151,7 @@
         </div>
       </div>
     </div>
+
     <div class="invest-right">
       <div class="invest-option">
         <div class="invest-option-title">✉ &nbsp;Contact &amp; Discuss</div>
@@ -1430,7 +1171,7 @@
 </section>
 
 <!-- ────────────────── FOOTER ────────────────── -->
-<footer id="site-footer">
+<footer>
   <div class="ft-brand">PASSENGERS5719</div>
   <div class="ft-copy">© 2026 Passengers5719. Robotics × Automotive. All rights reserved.</div>
   <div class="ft-links">
@@ -1442,114 +1183,48 @@
 </footer>
 
 <script>
-  // ── 1. Scroll Reveal
+  // 1. Scroll Reveal Observer for animating elements into view
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        io.unobserve(e.target);
+      }
     });
   }, { threshold: 0.06 });
+
   document.querySelectorAll('.rv, .rvl, .rvr').forEach(el => io.observe(el));
 
-  // Stagger children
+  // Stagger children of grids for smoother reveals
   document.querySelectorAll('.apps-grid, .tech-mechanisms, .id-pillars').forEach(parent => {
-    [...parent.children].forEach((child, i) => { child.style.transitionDelay = `${i * 0.1}s`; });
+    [...parent.children].forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.1}s`;
+    });
   });
 
-  // ── 2. Theme switch (gold → siberian)
-  let siberianActive = false;
+  // 2. Dynamic Theme Transformation Observer
+  // Transitions the page variables to Siberian Blue as we scroll into the "Robot" era
   const themeIo = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
+        // We've reached the deep tech future
         document.body.classList.add('siberian-theme');
-        siberianActive = true;
       } else {
+        // If scrolling back up past the trigger, warm it back up to sand
         if (e.boundingClientRect.top > 0) {
           document.body.classList.remove('siberian-theme');
-          siberianActive = false;
         }
       }
     });
   }, { threshold: 0.2 });
+
   const futureTrigger = document.querySelector('.era-robot');
-  if (futureTrigger) themeIo.observe(futureTrigger);
-
-  // ── 3. HORSE SCENE scroll logic
-  const horseScene = document.getElementById('horse-scene');
-  const heroSection = document.querySelector('.hero');
-  const eraRobotSection = document.getElementById('era-robot-section');
-
-  // Horse appears immediately on load (horse first, hills fade in as you scroll)
-  horseScene.classList.add('horse-visible');
-
-  // Use scroll progress to fade in hills
-  function updateHorseScene() {
-    if (!heroSection || !eraRobotSection) return;
-    const scrollY = window.scrollY;
-    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-    const robotTop = eraRobotSection.offsetTop;
-
-    // Hills fade in from scroll start to end of hero
-    const hillProgress = Math.min(1, scrollY / (heroBottom * 0.6));
-    if (hillProgress > 0.05) {
-      horseScene.classList.add('hills-visible');
-    } else {
-      horseScene.classList.remove('hills-visible');
-    }
-
-    // Arrest (fade out) when we reach the robot era (siberian trigger)
-    if (scrollY + window.innerHeight * 0.4 >= robotTop) {
-      horseScene.classList.add('arrested');
-    } else {
-      horseScene.classList.remove('arrested');
-    }
+  if (futureTrigger) {
+    themeIo.observe(futureTrigger);
   }
-
-  // ── 4. ROBOT SCENE scroll logic
-  const robotScene = document.getElementById('robot-scene');
-  const identitySection = document.getElementById('identity');
-  const footer = document.getElementById('site-footer');
-  const investSection = document.getElementById('invest');
-
-  function updateRobotScene() {
-    if (!identitySection || !footer) return;
-    const scrollY = window.scrollY;
-    const viewH = window.innerHeight;
-    const identityTop = identitySection.offsetTop;
-    const investTop = investSection ? investSection.offsetTop : 0;
-    const footerTop = footer.offsetTop;
-
-    // Robot fades in starting at identity section (second half of page)
-    // Fully visible by the invest section
-    const fadeStart = identityTop - viewH * 0.3;
-    const fadeEnd = investTop;
-    const progress = Math.max(0, Math.min(1, (scrollY - fadeStart) / Math.max(1, fadeEnd - fadeStart)));
-
-    // Arrest before footer
-    const arrestPoint = footerTop - viewH * 0.2;
-
-    if (scrollY >= arrestPoint) {
-      robotScene.classList.add('robot-arrested');
-      robotScene.classList.remove('robot-visible');
-    } else if (progress > 0.05) {
-      robotScene.classList.add('robot-visible');
-      robotScene.classList.remove('robot-arrested');
-      robotScene.style.opacity = progress;
-    } else {
-      robotScene.classList.remove('robot-visible');
-      robotScene.classList.remove('robot-arrested');
-      robotScene.style.opacity = 0;
-    }
-  }
-
-  window.addEventListener('scroll', () => {
-    updateHorseScene();
-    updateRobotScene();
-  }, { passive: true });
-
-  // Initial call
-  updateHorseScene();
-  updateRobotScene();
 </script>
 
 </body>
 </html>
+
+```
