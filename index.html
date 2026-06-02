@@ -1474,22 +1474,22 @@
   if (futureTrigger) themeIo.observe(futureTrigger);
 
   // ── 3. HORSE SCENE scroll logic
-  const horseScene = document.getElementById('horse-scene');
+  /*const horseScene = document.getElementById('horse-scene');
   const heroSection = document.querySelector('.hero');
   const eraRobotSection = document.getElementById('era-robot-section');
 
   // Horse appears immediately on load (horse first, hills fade in as you scroll)
-  horseScene.classList.add('horse-visible');
+ /* horseScene.classList.add('horse-visible');
 
   // Use scroll progress to fade in hills
-  function updateHorseScene() {
+/*  function updateHorseScene() {
     if (!heroSection || !eraRobotSection) return;
     const scrollY = window.scrollY;
     const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
     const robotTop = eraRobotSection.offsetTop;
 
     // Hills fade in from scroll start to end of hero
-    const hillProgress = Math.min(1, scrollY / (heroBottom * 0.6));
+  /*  const hillProgress = Math.min(1, scrollY / (heroBottom * 0.6));
     if (hillProgress > 0.05) {
       horseScene.classList.add('hills-visible');
     } else {
@@ -1497,7 +1497,7 @@
     }
 
     // Arrest (fade out) when we reach the robot era (siberian trigger)
-    if (scrollY + window.innerHeight * 0.4 >= robotTop) {
+  /*  if (scrollY + window.innerHeight * 0.4 >= robotTop) {
       horseScene.classList.add('arrested');
     } else {
       horseScene.classList.remove('arrested');
@@ -1505,7 +1505,7 @@
   }
 
   // ── 4. ROBOT SCENE scroll logic
-  const robotScene = document.getElementById('robot-scene');
+/*  const robotScene = document.getElementById('robot-scene');
   const identitySection = document.getElementById('identity');
   const footer = document.getElementById('site-footer');
   const investSection = document.getElementById('invest');
