@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corporate Strategy — Passengers5719</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&family=Cormorant+Garant:ital,wght@0,300;1,300;1,500;1,700&display=swap" rel="stylesheet"/>
+
+  <style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --bg:          #06060a;
+    --surf:        #0d0d12;
+    --surf2:       #121219;
+    --accent:      #c9a227;
+    --accent-lt:   #e8c24a;
+    --amber:       #c47a20;
+    --steel:       #4a5a6a;
+    --elec:        #38b2d8;
+    --text:        #e4e2db;
+    --muted:       #5a5870;
+    --border:      #1c1c26;
+    --grid:        #0f0f16;
+    --bg-a20:      rgba(6,6,10,0.2);
+    --bg-a90:      rgba(6,6,10,0.90);
+    --accent-a10:  rgba(201,162,39,0.1);
+    --accent-a30:  rgba(201,162,39,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* Grid and Noise Overlays */
+  body::before {
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:52px 52px; opacity:0.5;
+  }
+  body::after {
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity:0.45;
+  }
+
+  /* Layout & Typography Base */
+  section { position:relative; z-index:1; border-bottom:1px solid var(--border); }
+  .pad { padding:110px 56px; }
+  
+  .sh { display:flex; align-items:baseline; gap:20px; margin-bottom:64px; }
+  .sh-num { font-size:10px; letter-spacing:.3em; color:var(--accent); }
+  .sh-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,64px); letter-spacing:.04em; line-height:1; }
+  .sh-line { flex:1; height:1px; background:var(--border); }
+
+  .btn {
+    font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; padding:15px 34px; text-decoration:none;
+    display:inline-block;
+  }
+  .btn-fill { background:var(--accent); color:var(--bg); }
+  .btn-fill:hover { background:var(--accent-lt); color:#000; }
+  .btn-line { color:var(--muted); border-bottom:1px solid var(--border); padding:0 0 2px; }
+  .btn-line:hover { color:var(--accent); border-color:var(--accent); }
+
+  /* Navigation */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:300;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 56px; border-bottom:1px solid var(--border);
+    background:var(--bg-a90); backdrop-filter:blur(16px);
+  }
+  .nav-logo {
+    font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:0.22em; 
+    color:var(--accent); text-decoration:none; display:flex; align-items:center; gap:10px;
+  }
+  .nav-logo-mark {
+    width:24px; height:24px; border:1px solid var(--accent); border-radius:50%; 
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nav-logo-dot { width:6px; height:6px; background:var(--accent); border-radius:50%; }
+  .nav-links { display:flex; gap:36px; list-style:none; align-items:center; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; }
+  .nav-links a:hover { color:var(--accent); }
+  .nav-cta {
+    background:var(--accent); color:var(--bg); font-family:'DM Mono',monospace; 
+    font-size:10px; letter-spacing:0.2em; text-transform:uppercase; padding:11px 24px; 
+    text-decoration:none; flex-shrink:0;
+  }
+  .nav-cta:hover { background:var(--accent-lt); color:#000; }
+
+  /* Hero Section */
+  .hero-strat {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 150px 56px 80px;
+    background: radial-gradient(circle at 80% 20%, var(--surf2) 0%, transparent 60%);
+  }
+  .hero-tag {
+    display:flex; align-items:center; gap:12px; margin-bottom:32px;
+    font-size:9px; letter-spacing:.35em; text-transform:uppercase; color:var(--accent);
+  }
+  .hero-tag::before { content:''; width:32px; height:1px; background:var(--accent); }
+  .hero-hl {
+    font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,8vw,120px); 
+    line-height:.87; letter-spacing:.015em; max-width: 900px;
+  }
+  .hero-hl em { color:var(--accent); font-style:normal; }
+  .hero-sub {
+    font-family:'Cormorant Garant',serif; font-style:italic; font-size:clamp(20px,2vw,28px); 
+    color:var(--text); line-height:1.4; margin-top:32px; max-width:700px;
+  }
+
+  /* Split Content Block */
+  .split-block { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .split-pane { background: var(--bg); padding: 80px 56px; }
+  .pane-dark { background: var(--surf); }
+  .pane-hl { font-family:'Cormorant Garant',serif; font-style:italic; font-size:clamp(28px,3vw,42px); line-height:1.2; color:var(--text); margin-bottom: 24px; }
+  .pane-hl em { color:var(--accent); font-style:normal; }
+  .pane-body { font-size:13px; line-height:2.1; color:var(--muted); }
+  .pane-body p + p { margin-top: 16px; }
+
+  /* Strategic Playbook Grid */
+  .playbook-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+  .playbook-card { background: var(--surf); padding: 64px 48px; position: relative; }
+  .playbook-card:hover { background: var(--surf2); }
+  .pb-num { font-family:'Bebas Neue',sans-serif; font-size:80px; color:var(--accent); opacity:0.1; line-height:1; margin-bottom: 20px; }
+  .pb-title { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:.04em; color:var(--text); margin-bottom:16px; }
+  .pb-body { font-size:12px; line-height:1.9; color:var(--muted); }
+  .pb-metric { display:inline-block; margin-top:24px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); border-top: 1px solid var(--accent-a30); padding-top: 12px; }
+
+  /* Thesis Statement */
+  .thesis { padding: 120px 56px; text-align: center; background: var(--surf2); }
+  .thesis-text { font-family:'Cormorant Garant',serif; font-style:italic; font-size:clamp(32px,4vw,56px); line-height:1.2; color:var(--text); max-width: 900px; margin: 0 auto; }
+  .thesis-text em { color:var(--accent); }
+
+  /* Footer */
+  footer {
+    position:relative; z-index:1; border-top:1px solid var(--border); padding:28px 56px;
+    display:flex; justify-content:space-between; align-items:center; background: var(--bg);
+  }
+  .ft-brand { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:.2em; color:var(--accent); }
+  .ft-copy { font-size:10px; letter-spacing:.12em; color:var(--muted); }
+  .ft-links { display:flex; gap:28px; }
+  .ft-links a { font-size:10px; letter-spacing:.12em; color:var(--muted); text-decoration:none; }
+  .ft-links a:hover { color:var(--accent); }
+
+  @media(max-width:980px){
+    nav { padding:16px 24px; }
+    .nav-links li:not(:last-child){ display:none; }
+    .hero-strat { padding: 130px 24px 60px; }
+    .pad { padding: 60px 24px; }
+    .split-block, .playbook-grid { grid-template-columns: 1fr; }
+    .split-pane { padding: 56px 24px; }
+    .playbook-card { padding: 48px 24px; }
+    .thesis { padding: 80px 24px; }
+    footer { flex-direction:column; gap:16px; text-align:center; padding:24px; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- ────────────────── NAV ────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark"><div class="nav-logo-dot"></div></div>
+    PASSENGERS5719
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#manifesto">Vision</a></li>
+    <li><a href="index.html#tech">Technology</a></li>
+    <li><a href="#" style="color:var(--text);">Strategy</a></li>
+    <li><a href="mailto:contact@passengers5719.com" class="nav-cta">Partner →</a></li>
+  </ul>
+</nav>
+
+<!-- ────────────────── HERO ────────────────── -->
+<section class="hero-strat">
+  <div class="hero-tag">Corporate Strategy Document</div>
+  <h1 class="hero-hl">
+    The Stagnation Ends.<br/>
+    <em>The Convergence Begins.</em>
+  </h1>
+  <p class="hero-sub">
+    The automotive industry has confused drivetrain electrification with radical evolution. 
+    Replacing a gas tank with a battery does not change the fundamental paradigm: the vehicle remains a passive, blind container. 
+    Here is our roadmap to break the 100-year stagnation.
+  </p>
+</section>
+
+<!-- ────────────────── THE DIAGNOSIS ────────────────── -->
+<section>
+  <div class="split-block">
+    <div class="split-pane">
+      <h2 class="pane-hl">The Illusion of<br/><em>Automotive Progress</em></h2>
+      <div class="pane-body">
+        <p>For a century, automotive innovation has been strictly incremental. The transition to electric vehicles (EVs) is lauded as a revolution, but from an architectural standpoint, it is merely a substitution of fuel sources. The foundational architecture—a heavy, passive chassis suspended on dumb wheels, waiting for top-down instructions from a steering column or a central computer—remains entirely untouched.</p>
+        <p>Today's vehicles are sensors bolted onto 19th-century mechanics. We ask software to compensate for the physical ignorance of the machine. The result is bloated codebases, immense curb weights, and a market desperately iterating on diminishing returns. The automotive sector has plateaued because it refuses to redesign the vehicle from the ground up.</p>
+      </div>
+    </div>
+    <div class="split-pane pane-dark">
+      <h2 class="pane-hl">The Imperative of<br/><em>The Robotics Merger</em></h2>
+      <div class="pane-body">
+        <p>Look at modern robotics. A Boston Dynamics robot does not wait for a central CPU to tell it there is a rock under its left foot; the limb itself senses, computes, and reacts instantly. Robotics has mastered <strong>embodied intelligence</strong>—where the physical structure and the nervous system are one and the same.</p>
+        <p>Automotive has completely missed this merger. Passengers5719 exists to force the convergence. By embedding propulsion, compliance, and sensory response directly into the wheel—our 54-spoke, self-propelling architecture—we eliminate the drivetrain. We turn the vehicle from a passive carriage into a sentient, hyper-aware robot that moves <em>with</em> the passenger, not just carrying them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────── THESIS ────────────────── -->
+<section class="thesis">
+  <h2 class="thesis-text">
+    "We don't intend to build cars.<br/>
+    We intend to build the <em>nervous system</em><br/>
+    that every future car must sit on."
+  </h2>
+</section>
+
+<!-- ────────────────── MARKET ENTRY PLAYBOOK ────────────────── -->
+<section>
+  <div class="pad">
+    <div class="sh">
+      <span class="sh-num">03</span>
+      <h2 class="sh-title">Market Entry Playbook</h2>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+  
+  <div class="playbook-grid">
+    
+    <!-- Phase 1 -->
+    <div class="playbook-card">
+      <div class="pb-num">01</div>
+      <h3 class="pb-title">Extreme Environments & Aerospace</h3>
+      <div class="pb-body">
+        <p>You do not attack legacy automakers head-on. You prove the technology in environments where legacy mechanics fail catastrophically. Airless, extreme-temperature environments (like the Lunar surface) cannot tolerate rubber pneumatics or complex, exposed drivetrains.</p>
+        <p>We have already executed the first step of this phase: securing double validation from NASA, culminating in the physical delivery of our 18-inch prototype to the Johnson Space Center. Aerospace provides non-dilutive capital, rigorous R&D validation, and untouchable engineering prestige.</p>
+      </div>
+      <div class="pb-metric">Target: Planetary Rovers / Defense Platforms</div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="playbook-card">
+      <div class="pb-num">02</div>
+      <h3 class="pb-title">High-Volume Micromobility</h3>
+      <div class="pb-body">
+        <p>With the core technology validated by aerospace, we scale down cost and scale up production by entering the $50B+ micromobility market. E-bikes, urban delivery robots, and assistive wheelchairs suffer from heavy hub motors, chain maintenance, and poor terrain adaptation.</p>
+        <p>A self-propelling, compliant wheel eliminates the need for separate suspension, gearing, and drivetrain systems. By selling directly into this market, we generate commercial revenue, refine manufacturing tolerances, and normalize the concept of the "sentient wheel" to the general public.</p>
+      </div>
+      <div class="pb-metric">Target: B2B Fleet Sales & OEM E-Bike Integration</div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="playbook-card">
+      <div class="pb-num">03</div>
+      <h3 class="pb-title">Tier-1 Automotive Licensing</h3>
+      <div class="pb-body">
+        <p>The ultimate strategic objective. We do not want to manufacture heavy steel chassis or manage consumer automotive supply chains. Passengers5719 will operate as a Tier-1 technology provider.</p>
+        <p>We license the intelligent propulsion architecture to major OEMs who are struggling to differentiate their EV lineups. When an automaker integrates our wheel platform, they instantly shed hundreds of pounds of drivetrain and suspension weight, gaining unprecedented vehicle dynamics. We become the Intel Inside of the sentient vehicle era.</p>
+      </div>
+      <div class="pb-metric">Target: Global Automotive OEMs / Robotaxi Fleets</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ────────────────── CTA ────────────────── -->
+<section style="padding: 120px 56px; text-align: center; background: var(--bg);">
+  <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,80px); color:var(--text); margin-bottom: 32px;">
+    The Window to Lead is <span style="color:var(--accent);">Now.</span>
+  </h2>
+  <a href="mailto:contact@passengers5719.com" class="btn btn-fill">Inquire About Investment & Partnership</a>
+</section>
+
+<!-- ────────────────── FOOTER ────────────────── -->
+<footer>
+  <div class="ft-brand">PASSENGERS5719</div>
+  <div class="ft-copy">© 2026 Passengers5719. Robotics × Automotive. All rights reserved.</div>
+  <div class="ft-links">
+    <a href="index.html#manifesto">Manifesto</a>
+    <a href="index.html#tech">Technology</a>
+    <a href="#">Strategy</a>
+    <a href="mailto:contact@passengers5719.com">Partner</a>
+  </div>
+</footer>
+
+</body>
+</html>
