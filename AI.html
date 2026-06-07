@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,20 +14,53 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* Dark Mode (Default) */
       --bg:         #08090a;
       --bg2:        #0d0f11;
       --surface:    #111416;
       --border:     rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.3);
       --gold:       #c9a84c;
       --gold-pale:  #e8d4a0;
       --white:      #f0ede8;
       --muted:      rgba(240,237,232,0.45);
       --accent:     #3d7fff;
       --accent2:    #00c9b1;
+      
+      --nav-bg:     rgba(8,9,10,0.85);
+      --hero-stroke: rgba(201,168,76,0.07);
 
       --ff-display: 'Syne', sans-serif;
       --ff-serif:   'Cormorant Garamond', serif;
       --ff-mono:    'JetBrains Mono', monospace;
+    }
+
+    body.light-mode {
+      /* Light Mode (Complimentary) */
+      --bg:         #fcfbf9;
+      --bg2:        #f3f1ec;
+      --surface:    #ffffff;
+      --border:     rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.25);
+      --gold:       #b58c2a; 
+      --gold-pale:  #cda33a;
+      --white:      #111416; /* Inverted to act as primary dark text */
+      --muted:      rgba(17,20,22,0.55);
+      --accent:     #1a66ff;
+      --accent2:    #009988;
+      
+      --nav-bg:     rgba(252,251,249,0.85);
+      --hero-stroke: rgba(181,140,42,0.08);
+    }
+
+    /* Smooth transition for theme switching */
+    body, body *, body *::before, body *::after {
+      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, -webkit-text-stroke 0.6s ease;
+    }
+    
+    /* Overrides to keep hover interactions snappy */
+    .btn-primary, .btn-ghost, .nav-links a, .sector-cell, .sector-hover-line, .achievement-row, .theme-toggle {
+      transition: all 0.3s ease !important;
     }
 
     html { scroll-behavior: smooth; }
@@ -52,6 +86,9 @@
       mix-blend-mode: difference;
       transition: transform 0.15s ease;
     }
+    body.light-mode .cursor {
+      mix-blend-mode: normal;
+    }
     .cursor-ring {
       width: 38px; height: 38px;
       border: 1px solid var(--gold);
@@ -61,6 +98,9 @@
       z-index: 9998;
       opacity: 0.5;
       transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), opacity 0.2s;
+    }
+    body.light-mode .cursor-ring {
+      mix-blend-mode: normal;
     }
 
     /* ─── GRID NOISE OVERLAY ───────────────────────────────────────── */
@@ -74,6 +114,11 @@
       pointer-events: none;
       z-index: 0;
     }
+    body.light-mode::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+    }
 
     /* ─── NAV ──────────────────────────────────────────────────────── */
     nav {
@@ -82,7 +127,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 4rem;
       border-bottom: 1px solid var(--border);
-      background: rgba(8,9,10,0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(16px);
     }
 
@@ -94,8 +139,17 @@
       text-transform: uppercase;
       color: var(--white);
       text-decoration: none;
+      flex: 1;
     }
     .nav-logo span { color: var(--gold); }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex: 2;
+      justify-content: center;
+    }
 
     .nav-links {
       display: flex; gap: 2.4rem;
@@ -108,9 +162,39 @@
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
-      transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--gold); }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      cursor: none; /* keep custom cursor */
+      outline: none;
+    }
+    .theme-toggle:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: var(--surface);
+      transform: rotate(15deg);
+    }
+    .theme-toggle svg { width: 14px; height: 14px; }
+    .icon-moon { display: none; }
+    body.light-mode .icon-sun { display: none; }
+    body.light-mode .icon-moon { display: block; }
+
+    .nav-right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
 
     .nav-tag {
       font-family: var(--ff-mono);
@@ -140,7 +224,7 @@
       font-size: clamp(8rem, 22vw, 22rem);
       font-weight: 800;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(201,168,76,0.07);
+      -webkit-text-stroke: 1px var(--hero-stroke);
       letter-spacing: -0.02em;
       user-select: none;
       pointer-events: none;
@@ -199,10 +283,9 @@
       text-transform: uppercase;
       text-decoration: none;
       background: var(--gold);
-      color: #08090a;
+      color: #08090a; /* Intentionally strict dark for contrast on gold */
       padding: 1em 2.2em;
       display: inline-block;
-      transition: background 0.2s, transform 0.2s;
     }
     .btn-primary:hover { background: var(--gold-pale); transform: translateY(-2px); }
 
@@ -216,9 +299,8 @@
       border: 1px solid var(--border);
       padding: 1em 2.2em;
       display: inline-block;
-      transition: color 0.2s, border-color 0.2s;
     }
-    .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+    .btn-ghost:hover { color: var(--white); border-color: var(--border-hover); }
 
     .hero-scroll-hint {
       position: absolute;
@@ -393,7 +475,6 @@
       padding: 2.8rem 2.4rem;
       position: relative;
       overflow: hidden;
-      transition: background 0.3s;
       cursor: none;
     }
     .sector-cell:hover { background: var(--surface); }
@@ -429,7 +510,6 @@
       height: 2px;
       width: 0;
       background: var(--gold);
-      transition: width 0.4s ease;
     }
     .sector-cell:hover .sector-hover-line { width: 100%; }
 
@@ -445,7 +525,6 @@
       gap: 6rem;
       align-items: start;
     }
-    .approach-left {}
     .approach-heading {
       font-family: var(--ff-display);
       font-size: clamp(2rem, 4vw, 3.6rem);
@@ -534,7 +613,6 @@
       align-items: center;
       padding: 2.2rem 0;
       border-bottom: 1px solid var(--border);
-      transition: background 0.2s;
     }
     .achievement-row:first-child { border-top: 1px solid var(--border); }
     .achievement-row:hover { background: var(--surface); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
@@ -586,7 +664,7 @@
       font-size: 38vw;
       font-weight: 800;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(201,168,76,0.04);
+      -webkit-text-stroke: 1px var(--hero-stroke);
       pointer-events: none;
       user-select: none;
     }
@@ -719,7 +797,10 @@
     /* ─── RESPONSIVE ───────────────────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 2rem; }
+      .nav-center { flex: 0; gap: 1rem; }
       .nav-links { display: none; }
+      .nav-tag { display: none; }
+      .nav-right { flex: 0; }
       #hero { padding: 0 2rem 4rem; }
       #about { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
       .sectors-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -738,24 +819,44 @@
 </head>
 <body>
 
-  <!-- Custom cursor -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Abundant<span>.</span>Innovation</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#sectors">Sectors</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#achievements">Track Record</a></li>
-      <li><a href="#cta">Contact</a></li>
-    </ul>
-    <div class="nav-tag">AI — Est. 2025</div>
+    
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#achievements">Track Record</a></li>
+        <li><a href="#cta">Contact</a></li>
+      </ul>
+      
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-tag">AI — Est. 2025</div>
+    </div>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-bg-text" aria-hidden="true">AI</div>
     <p class="hero-eyebrow">Abundant Innovation &nbsp;/&nbsp; Open Challenge Studio</p>
@@ -775,7 +876,6 @@
     </div>
   </section>
 
-  <!-- TICKER -->
   <div class="ticker-wrap" aria-hidden="true">
     <div class="ticker-inner">
       <span class="gold">Abundant Innovation</span>
@@ -815,7 +915,6 @@
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-left reveal">
       <p class="section-label">// 001 — About</p>
@@ -844,7 +943,6 @@
     </div>
   </section>
 
-  <!-- SECTORS -->
   <section id="sectors">
     <div class="sectors-header reveal">
       <div>
@@ -906,7 +1004,6 @@
     </div>
   </section>
 
-  <!-- APPROACH -->
   <section id="approach">
     <div class="approach-inner">
       <div class="approach-left reveal">
@@ -958,7 +1055,6 @@
     </div>
   </section>
 
-  <!-- ACHIEVEMENTS -->
   <section id="achievements">
     <div class="achievements-header reveal">
       <p class="section-label">// 004 — Track Record</p>
@@ -1008,7 +1104,6 @@
     </div>
   </section>
 
-  <!-- CTA -->
   <section id="cta">
     <p class="cta-label">// 005 — Connect</p>
     <h2 class="cta-heading">
@@ -1023,7 +1118,6 @@
     </form>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Abundant<span>.</span>Innovation</div>
     <p class="footer-copy">© 2025 Abundant Innovation. All rights reserved.</p>
@@ -1035,6 +1129,12 @@
   </footer>
 
   <script>
+    /* ── Theme Toggle ── */
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+    });
+
     /* ── Cursor ── */
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursorRing');
@@ -1071,3 +1171,5 @@
   </script>
 </body>
 </html>
+
+```
