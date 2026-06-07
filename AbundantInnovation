@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abundant Innovation — Where Bold Ideas Meet Open Challenges</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ─── RESET & ROOT ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #08090a;
+      --bg2:        #0d0f11;
+      --surface:    #111416;
+      --border:     rgba(255,255,255,0.07);
+      --gold:       #c9a84c;
+      --gold-pale:  #e8d4a0;
+      --white:      #f0ede8;
+      --muted:      rgba(240,237,232,0.45);
+      --accent:     #3d7fff;
+      --accent2:    #00c9b1;
+
+      --ff-display: 'Syne', sans-serif;
+      --ff-serif:   'Cormorant Garamond', serif;
+      --ff-mono:    'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--ff-serif);
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CURSOR ───────────────────────────────────────────────────── */
+    .cursor {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease;
+    }
+    .cursor-ring {
+      width: 38px; height: 38px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), opacity 0.2s;
+    }
+
+    /* ─── GRID NOISE OVERLAY ───────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,9,10,0.85);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 2.4rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.3em 0.8em;
+      text-transform: uppercase;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--ff-display);
+      font-size: clamp(8rem, 22vw, 22rem);
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,168,76,0.07);
+      letter-spacing: -0.02em;
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+
+    .hero-headline {
+      font-family: var(--ff-display);
+      font-size: clamp(3rem, 7.5vw, 7rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+    .hero-headline em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 2.4rem;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 48ch;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s ease forwards;
+    }
+
+    .hero-cta-row {
+      margin-top: 3.2rem;
+      display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s ease forwards;
+    }
+
+    .btn-primary {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--gold);
+      color: #08090a;
+      padding: 1em 2.2em;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-pale); transform: translateY(-2px); }
+
+    .btn-ghost {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 1em 2.2em;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+    .hero-scroll-hint {
+      position: absolute;
+      right: 4rem; bottom: 3.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.1s ease forwards;
+    }
+    .hero-scroll-hint span {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* ─── TICKER ───────────────────────────────────────────────────── */
+    .ticker-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      padding: 0.85rem 0;
+      white-space: nowrap;
+      position: relative;
+      z-index: 2;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-inner span {
+      font-family: var(--ff-mono);
+      font-size: 0.67rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 3rem;
+    }
+    .ticker-inner span.gold { color: var(--gold); }
+
+    /* ─── SECTIONS ─────────────────────────────────────────────────── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    /* ─── ABOUT ────────────────────────────────────────────────────── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      padding: 8rem 4rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .about-left { max-width: 52ch; }
+    .about-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .about-heading em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .about-body {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .about-body p + p { margin-top: 1.2rem; }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-top: 0.5rem;
+    }
+    .stat-card {
+      border: 1px solid var(--border);
+      padding: 2rem 2.2rem;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+    }
+    .stat-card:hover { border-color: rgba(201,168,76,0.35); }
+    .stat-num {
+      font-family: var(--ff-display);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ─── SECTORS ──────────────────────────────────────────────────── */
+    #sectors {
+      padding: 8rem 4rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .sectors-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .sectors-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .sectors-title em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .sectors-desc {
+      max-width: 38ch;
+      color: var(--muted);
+      font-size: 1rem;
+      text-align: right;
+    }
+
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .sector-cell {
+      background: var(--bg);
+      padding: 2.8rem 2.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: none;
+    }
+    .sector-cell:hover { background: var(--surface); }
+    .sector-cell:hover .sector-icon { transform: scale(1.1) rotate(-5deg); }
+    .sector-num {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .sector-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.4rem;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .sector-name {
+      font-family: var(--ff-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.8rem;
+    }
+    .sector-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .sector-hover-line {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--gold);
+      transition: width 0.4s ease;
+    }
+    .sector-cell:hover .sector-hover-line { width: 100%; }
+
+    /* ─── APPROACH ─────────────────────────────────────────────────── */
+    #approach {
+      padding: 8rem 4rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .approach-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .approach-left {}
+    .approach-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .approach-heading em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .approach-body {
+      margin-top: 2rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 1.8rem;
+      align-items: start;
+      padding: 2.4rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .step:first-child { border-top: 1px solid var(--border); }
+    .step-num {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      padding-top: 0.3rem;
+    }
+    .step-title {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── ACHIEVEMENTS ─────────────────────────────────────────────── */
+    #achievements {
+      padding: 8rem 4rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .achievements-header {
+      margin-bottom: 4.5rem;
+    }
+    .achievements-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .achievements-title em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .achievements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .achievement-row {
+      display: grid;
+      grid-template-columns: 12rem 1fr 10rem;
+      gap: 3rem;
+      align-items: center;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .achievement-row:first-child { border-top: 1px solid var(--border); }
+    .achievement-row:hover { background: var(--surface); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+    .achievement-org {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .achievement-name {
+      font-family: var(--ff-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .achievement-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .achievement-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: 0.3em 0.8em;
+      text-align: center;
+      width: fit-content;
+      margin-left: auto;
+    }
+
+    /* ─── CTA BAND ─────────────────────────────────────────────────── */
+    #cta {
+      padding: 8rem 4rem;
+      background: var(--surface);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    #cta::before {
+      content: 'AI';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--ff-display);
+      font-size: 38vw;
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,168,76,0.04);
+      pointer-events: none;
+      user-select: none;
+    }
+    .cta-label {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .cta-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin: 0 auto 1.5rem;
+    }
+    .cta-heading em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .cta-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 42ch;
+      margin: 0 auto 3rem;
+    }
+    .cta-email-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .cta-email-form input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-right: none;
+      color: var(--white);
+      padding: 1em 1.4em;
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .cta-email-form input:focus { border-color: var(--gold); }
+    .cta-email-form input::placeholder { color: var(--muted); }
+    .cta-email-form button {
+      background: var(--gold);
+      border: none;
+      color: #08090a;
+      padding: 1em 1.8em;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: background 0.2s;
+    }
+    .cta-email-form button:hover { background: var(--gold-pale); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .footer-logo {
+      font-family: var(--ff-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .footer-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .footer-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ─── ANIMATIONS ───────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+      #hero { padding: 0 2rem 4rem; }
+      #about { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
+      .sectors-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .sectors-desc { text-align: left; }
+      .sectors-grid { grid-template-columns: 1fr; }
+      #sectors { padding: 5rem 2rem; }
+      #approach { padding: 5rem 2rem; }
+      .approach-inner { grid-template-columns: 1fr; gap: 3rem; }
+      #achievements { padding: 5rem 2rem; }
+      .achievement-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.8rem 0; }
+      .achievement-tag { margin-left: 0; }
+      #cta { padding: 5rem 2rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Abundant<span>.</span>Innovation</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#sectors">Sectors</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#achievements">Track Record</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+    <div class="nav-tag">AI — Est. 2025</div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-text" aria-hidden="true">AI</div>
+    <p class="hero-eyebrow">Abundant Innovation &nbsp;/&nbsp; Open Challenge Studio</p>
+    <h1 class="hero-headline">
+      Where <em>bold</em><br>ideas meet<br>open challenges
+    </h1>
+    <p class="hero-sub">
+      A cross-sector innovation studio competing in the world's most demanding open challenges — from the depths of the Earth to the edge of the cosmos. First principles. No orthodoxy.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#sectors" class="btn-primary">Explore Sectors</a>
+      <a href="#achievements" class="btn-ghost">Track Record →</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="gold">Abundant Innovation</span>
+      <span>Space Exploration</span>
+      <span>·</span>
+      <span>Earth Sciences</span>
+      <span>·</span>
+      <span>Autonomous Systems</span>
+      <span>·</span>
+      <span>Aerospace Engineering</span>
+      <span>·</span>
+      <span class="gold">Open Innovation</span>
+      <span>·</span>
+      <span>Geology</span>
+      <span>·</span>
+      <span>Mechanical Design</span>
+      <span>·</span>
+      <span>Software Intelligence</span>
+      <span>·</span>
+      <span class="gold">Abundant Innovation</span>
+      <span>Space Exploration</span>
+      <span>·</span>
+      <span>Earth Sciences</span>
+      <span>·</span>
+      <span>Autonomous Systems</span>
+      <span>·</span>
+      <span>Aerospace Engineering</span>
+      <span>·</span>
+      <span class="gold">Open Innovation</span>
+      <span>·</span>
+      <span>Geology</span>
+      <span>·</span>
+      <span>Mechanical Design</span>
+      <span>·</span>
+      <span>Software Intelligence</span>
+      <span>·</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-left reveal">
+      <p class="section-label">// 001 — About</p>
+      <h2 class="about-heading">
+        Innovation as a<br><em>discipline</em>, not a<br>department.
+      </h2>
+      <div class="about-body">
+        <p>Abundant Innovation (AI) is a solo-founder innovation studio built on one conviction: the most important problems in the world are open — and the best solutions come from those willing to start from zero.</p>
+        <p>Founded by a multi-disciplinary engineer with hands-on experience in aerospace, combustion, autonomous systems, and flight-critical software, AI participates in open innovation challenges where the stakes are highest and the orthodoxy thinnest.</p>
+        <p>We don't consult. We don't advise. We build, fabricate, ship, and compete.</p>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <div class="stat-card">
+        <div class="stat-num">2×</div>
+        <div class="stat-label">NASA Challenge Winner</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Sectors of Active Innovation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Appetite for First-Principles Thinking</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section id="sectors">
+    <div class="sectors-header reveal">
+      <div>
+        <p class="section-label">// 002 — Sectors</p>
+        <h2 class="sectors-title">Fields of<br><em>innovation</em></h2>
+      </div>
+      <p class="sectors-desc">From orbital mechanics to geological subsurface — the domain is wherever the hardest problems are.</p>
+    </div>
+    <div class="sectors-grid">
+
+      <div class="sector-cell reveal">
+        <p class="sector-num">01</p>
+        <span class="sector-icon">🛸</span>
+        <h3 class="sector-name">Space Exploration</h3>
+        <p class="sector-text">Propulsion, surface mobility, life support, and mission-critical hardware. Innovation for the orbital economy and beyond.</p>
+        <div class="sector-hover-line"></div>
+      </div>
+
+      <div class="sector-cell reveal">
+        <p class="sector-num">02</p>
+        <span class="sector-icon">🌍</span>
+        <h3 class="sector-name">Earth Sciences & Geology</h3>
+        <p class="sector-text">Subsurface mapping, environmental monitoring, and geological instrumentation. The planet beneath us is largely unmapped.</p>
+        <div class="sector-hover-line"></div>
+      </div>
+
+      <div class="sector-cell reveal">
+        <p class="sector-num">03</p>
+        <span class="sector-icon">🤖</span>
+        <h3 class="sector-name">Autonomous Systems</h3>
+        <p class="sector-text">Intelligent vehicles, self-propelling mechanisms, and robotics at the frontier of human mobility. Sibling to Passengers5719.</p>
+        <div class="sector-hover-line"></div>
+      </div>
+
+      <div class="sector-cell reveal">
+        <p class="sector-num">04</p>
+        <span class="sector-icon">✈️</span>
+        <h3 class="sector-name">Aerospace Engineering</h3>
+        <p class="sector-text">Flight-critical systems, EASA certification frameworks, and structural design for airborne platforms.</p>
+        <div class="sector-hover-line"></div>
+      </div>
+
+      <div class="sector-cell reveal">
+        <p class="sector-num">05</p>
+        <span class="sector-icon">🔥</span>
+        <h3 class="sector-name">Energy & Combustion</h3>
+        <p class="sector-text">Miniaturized combustion systems, alternative fuels, and thermal efficiency research grounded in DVGW-standard testing.</p>
+        <div class="sector-hover-line"></div>
+      </div>
+
+      <div class="sector-cell reveal">
+        <p class="sector-num">06</p>
+        <span class="sector-icon">🧠</span>
+        <h3 class="sector-name">Software & AI Systems</h3>
+        <p class="sector-text">ML-assisted quality assurance, safety-critical software validation (DO-178C), and intelligent systems architecture.</p>
+        <div class="sector-hover-line"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <div class="approach-inner">
+      <div class="approach-left reveal">
+        <p class="section-label">// 003 — Approach</p>
+        <h2 class="approach-heading">
+          The method<br>behind the<br><em>madness</em>
+        </h2>
+        <p class="approach-body">
+          Open innovation isn't about incremental improvement. It's about rethinking the constraint set entirely. Every challenge we enter is treated as a system problem — not a product problem.
+        </p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <h3 class="step-title">Challenge Identification</h3>
+            <p class="step-desc">We scan HeroX, NASA, ESA, XPRIZE, and government bodies for open challenges where cross-disciplinary engineering creates an asymmetric advantage.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <h3 class="step-title">First-Principles Decomposition</h3>
+            <p class="step-desc">Every problem is stripped to its physics, not its industry convention. What does the constraint actually require? What are we free to reimagine?</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <h3 class="step-title">Rapid Prototyping & Fabrication</h3>
+            <p class="step-desc">We build physical artifacts, not slide decks. CAD, machining, and material sourcing — wherever in the world it needs to happen.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div>
+            <h3 class="step-title">Submission & Publication</h3>
+            <p class="step-desc">Results are submitted to challenge organizers and published openly. Winning is the goal. Learning is the fallback.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">05</span>
+          <div>
+            <h3 class="step-title">IP Development</h3>
+            <p class="step-desc">Winning concepts are developed into transferable intellectual property, licensing opportunities, or integrated into our own ventures.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="achievements-header reveal">
+      <p class="section-label">// 004 — Track Record</p>
+      <h2 class="achievements-title">Proven in<br><em>competition</em></h2>
+    </div>
+    <div class="achievements-list reveal">
+      <div class="achievement-row">
+        <div class="achievement-org">NASA / HeroX</div>
+        <div>
+          <div class="achievement-name">Rock &amp; Roll with NASA — Wheel Challenge 2025</div>
+          <div class="achievement-sub">Designed, fabricated and shipped an 18-inch airless wheel prototype from Europe to NASA Johnson Space Center, Houston</div>
+        </div>
+        <div class="achievement-tag">Winner</div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-org">NASA</div>
+        <div>
+          <div class="achievement-name">NASA Open Innovation Challenge</div>
+          <div class="achievement-sub">Two-time recognition in NASA open engineering competitions across different challenge domains</div>
+        </div>
+        <div class="achievement-tag">2× Winner</div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-org">Volocopter GmbH</div>
+        <div>
+          <div class="achievement-name">Flight Control Systems Integration</div>
+          <div class="achievement-sub">EASA-certified flight-critical software under DO-178C for urban air mobility platforms</div>
+        </div>
+        <div class="achievement-tag">Completed</div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-org">DVGW / KIT</div>
+        <div>
+          <div class="achievement-name">Combustion Miniaturization Research</div>
+          <div class="achievement-sub">Achieved significant fuel-efficiency improvements via novel counter-flow burner geometry at Engler-Bunte-Institut</div>
+        </div>
+        <div class="achievement-tag">Published</div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-org">Stanford University</div>
+        <div>
+          <div class="achievement-name">AirCart — Collaborative Design Project</div>
+          <div class="achievement-sub">Cross-continental engineering collaboration on cargo handling system design</div>
+        </div>
+        <div class="achievement-tag">Completed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <p class="cta-label">// 005 — Connect</p>
+    <h2 class="cta-heading">
+      Have a<br>challenge for<br><em>us</em>?
+    </h2>
+    <p class="cta-sub">
+      We're open to challenge partnerships, co-innovation engagements, and licensing conversations across all sectors.
+    </p>
+    <form class="cta-email-form" onsubmit="handleForm(event)">
+      <input type="email" placeholder="your@organization.com" required />
+      <button type="submit">Connect →</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Abundant<span>.</span>Innovation</div>
+    <p class="footer-copy">© 2025 Abundant Innovation. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#sectors">Sectors</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    /* ── Cursor ── */
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animate() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+      ring.style.transform   = `translate(${rx - 19}px, ${ry - 19}px)`;
+      requestAnimationFrame(animate);
+    })();
+
+    /* ── Scroll Reveal ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+
+    /* ── Form ── */
+    function handleForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Received ✓';
+      btn.style.background = 'var(--accent2)';
+      setTimeout(() => { btn.textContent = 'Connect →'; btn.style.background = ''; }, 3000);
+    }
+  </script>
+</body>
+</html>
